@@ -1,12 +1,14 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import permissions
 
 from .serializers import ActivitySerializer
 from .models import Activity
 
 
 @api_view(['GET', 'POST'])
+@permission_classes((permissions.IsAuthenticated,))
 def activity_list(request):
     if request.method == 'GET':
         activities = Activity.objects.all()
@@ -23,6 +25,7 @@ def activity_list(request):
 
 
 @api_view(['PUT'])
+@permission_classes((permissions.IsAuthenticated,))
 def update_activity(request, from_id, to_id):
     try:
         activity = Activity.objects.get(from_id=from_id, to_id=to_id)
