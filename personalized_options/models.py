@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
+from django.core.exceptions import ValidationError
 
 from .constants import PURPOSE_CHOICES, DAY_OF_WEEK_CHOICES, MODE_CHOICES
 
@@ -19,6 +20,10 @@ class Activity(models.Model):
     to_lat = models.FloatField('End latitude')
     to_lon = models.FloatField('End longitude')
     probabilities = models.TextField('JSON format of probability values for 96 15-minute time slots')
+
+    def clean(self):  # model-wide validation
+        if self.from_id == self.to_id:
+            raise ValidationError('from_id ({}) and to_id ({}) cannot be the same!'.format(self.from_id, self.to_id))
 
     class Meta:
         indexes = [
