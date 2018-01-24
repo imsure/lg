@@ -25,9 +25,12 @@ def validate_probabilities(probabilities):
 
         prob_total += prob
 
-    if prob_total < 99.9 or prob_total > 100.1:
+    if prob_total < 99.9:
         raise serializers.ValidationError('The total of 96 probability values must sum up to 100. '
-                                          'But the actual total is {}'.format(prob_total))
+                                          'But the actual total is below 100, which is {}'.format(prob_total))
+    if prob_total > 100.1:
+        raise serializers.ValidationError('The total of 96 probability values must not above 100. '
+                                          'But the actual total is above 100, which is {}'.format(prob_total))
 
 
 class ActivitySerializer(serializers.ModelSerializer):

@@ -43,45 +43,27 @@ class ActivityListViewTest(APITestCase):
         self.user = set_up_user()
 
     def test_get_list(self):
-        data = {
-            'from_id': 1,
-            'to_id': 2,
-            'from_lat': from_lat,
-            'from_lon': from_lon,
-            'to_lat': to_lat,
-            'to_lon': to_lon,
-            'purpose': 'W',
-            'day_of_week': 'WD',
-            'probabilities': utils.probability_list(),
-        }
-        Activity.objects.create(**data)
+        activity1 = create_activity_instance()
+        Activity.objects.create(**activity1)
+        activity2 = create_activity_instance()
+        Activity.objects.create(**activity2)
 
         client = APIClient()
         user = User.objects.get(username='alex')
         client.force_authenticate(user=user)
         response = client.get(reverse('create_activity'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(json.loads(response.content.decode('utf-8'))), 1)
+        self.assertEqual(len(json.loads(response.content.decode('utf-8'))), 2)
 
     def test_create_activity(self):
         """
         An activity with the correct and required field values should be created successfully.
         """
-        data = {
-            "from_id": next(place_id_iter),
-            "to_id": next(place_id_iter),
-            "from_lat": from_lat,
-            "from_lon": from_lon,
-            "to_lat": to_lat,
-            "to_lon": to_lon,
-            "purpose": "W",
-            "day_of_week": "WD",
-            "probabilities": utils.probability_list(),
-        }
+        activity = create_activity_instance()
         client = APIClient()
         user = User.objects.get(username='alex')
         client.force_authenticate(user=user)
-        response = client.post(reverse('create_activity'), data, format='json')
+        response = client.post(reverse('create_activity'), activity, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_create_batch_of_activity(self):
@@ -91,20 +73,10 @@ class ActivityListViewTest(APITestCase):
         client = APIClient()
         for purpose in const.PURPOSE_CHOICES:
             for day_of_week in const.DAY_OF_WEEK_CHOICES:
-                data = {
-                    "from_id": next(place_id_iter),
-                    "to_id": next(place_id_iter),
-                    "from_lat": from_lat,
-                    "from_lon": from_lon,
-                    "to_lat": to_lat,
-                    "to_lon": to_lon,
-                    "purpose": purpose[0],
-                    "day_of_week": day_of_week[0],
-                    "probabilities": utils.probability_list(),
-                }
+                activity = create_activity_instance(purpose=purpose[0], day_of_week=day_of_week[0])
                 user = User.objects.get(username='alex')
                 client.force_authenticate(user=user)
-                response = client.post(reverse('create_activity'), data, format='json')
+                response = client.post(reverse('create_activity'), activity, format='json')
                 self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         response = client.get(reverse('create_activity'))
@@ -173,7 +145,41 @@ class ActivityListViewTest(APITestCase):
         activity = create_activity_instance(prob_list=prob_list)
         response = client.post(reverse('create_activity'), activity, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertRegex(response.content.decode('utf-8'), 'The total of 96 probability values must sum up to 100')
+        self.assertRegex(response.content.decode('utf-8'),
+                         'The total of 96 probability values must not above 100. But the actual total is above 100')
+
+        prob_list = utils.probability_list()
+        for i in range(0, 45):  # make the sum less than 100
+            prob_list[i] = 0
+        activity = create_activity_instance(prob_list=prob_list)
+        response = client.post(reverse('create_activity'), activity, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertRegex(response.content.decode('utf-8'),
+                         'The total of 96 probability values must sum up to 100. But the actual total is below 100')
+
+    def test_prob_value_not_in_range(self):
+        """
+        The 96 values in probability list should be in the range of [0,100].
+        """
+        client = APIClient()
+        user = User.objects.get(username='alex')
+        client.force_authenticate(user=user)
+
+        prob_list = utils.probability_list()
+        prob_list[95] = 100.1  # make the last element exceed 100 to raise the error
+        activity = create_activity_instance(prob_list=prob_list)
+        response = client.post(reverse('create_activity'), activity, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertRegex(response.content.decode('utf-8'),
+                         'Probability value must be in between 0 and 100')
+
+        prob_list = utils.probability_list()
+        prob_list[0] = -0.1  # make the last element below 0 to raise the error
+        activity = create_activity_instance(prob_list=prob_list)
+        response = client.post(reverse('create_activity'), activity, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertRegex(response.content.decode('utf-8'),
+                         'Probability value must be in between 0 and 100')
 
     def test_from_id_to_id_must_unique_together(self):
         """
@@ -192,7 +198,7 @@ class ActivityListViewTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertRegex(response.content.decode('utf-8'), 'The fields from_id, to_id must make a unique set')
 
-    def test_from_id_to_id_same_value_not_allowd(self):
+    def test_from_id_to_id_same_value_not_allowed(self):
         """
         from_id and to_id of an activity cannot be the same.
         """
