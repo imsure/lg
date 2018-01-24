@@ -1,5 +1,4 @@
 from random import random
-import json
 
 
 def unique_place_id():
