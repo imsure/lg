@@ -1,7 +1,6 @@
 import unittest
 
-import personalized_options.utils as utils
-
+from .. import utils
 
 class TestUtilsMethods(unittest.TestCase):
 

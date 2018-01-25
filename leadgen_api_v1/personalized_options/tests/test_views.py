@@ -7,9 +7,8 @@ from rest_framework.test import APITestCase, APIClient
 
 from .common import *
 from ..models import Activity
-import personalized_options.constants as const
-import personalized_options.utils as utils
-
+from .. import constants as const
+from .. import utils
 
 place_id_iter = utils.unique_place_id()
 
