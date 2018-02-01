@@ -1,5 +1,14 @@
 from django.contrib import admin
 
-from .models import Activity
+from .models import Activity, TravelOption
 
-admin.site.register(Activity)
+
+class TravelOptionInline(admin.TabularInline):
+    model = TravelOption
+
+
+class ActivityAdmin(admin.ModelAdmin):
+    inlines = [TravelOptionInline]
+
+
+admin.site.register(Activity, ActivityAdmin)

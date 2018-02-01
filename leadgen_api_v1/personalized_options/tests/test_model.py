@@ -1,12 +1,9 @@
 from django.core.exceptions import ValidationError
 
-from rest_framework.test import APITestCase, APIClient
+from rest_framework.test import APITestCase
 
-from .common import *
+from . import fixture
 from ..models import Activity
-import personalized_options.utils as utils
-
-place_id_iter = utils.unique_place_id()
 
 
 class ActivityModelTests(APITestCase):
@@ -18,13 +15,11 @@ class ActivityModelTests(APITestCase):
         data = {
             'from_id': 1,
             'to_id': 2,
-            'from_lat': from_lat,
-            'from_lon': from_lon,
-            'to_lat': to_lat,
-            'to_lon': to_lon,
+            'from_lat': fixture.from_lat_tucson,
+            'from_lon': fixture.from_lon_tucson,
+            'to_lat': fixture.to_lat_tucson,
+            'to_lon': fixture.to_lon_tucson,
             'purpose': 'W',
-            'day_of_week': 'WD',
-            'probabilities': utils.probability_list(),
         }
         activity = Activity.objects.create(**data)
         activity.full_clean()  # invoke model validation
@@ -38,13 +33,11 @@ class ActivityModelTests(APITestCase):
         data = {
             'from_id': 1,
             'to_id': 2,
-            'from_lat': from_lat,
-            'from_lon': from_lon,
-            'to_lat': to_lat,
-            'to_lon': to_lon,
+            'from_lat': fixture.from_lat_tucson,
+            'from_lon': fixture.from_lon_tucson,
+            'to_lat': fixture.to_lat_tucson,
+            'to_lon': fixture.to_lon_tucson,
             'purpose': 'W',
-            'day_of_week': 'WD',
-            'probabilities': utils.probability_list(),
         }
         activity = Activity.objects.create(**data)
         activity.full_clean()  # invoke model validation
@@ -62,13 +55,11 @@ class ActivityModelTests(APITestCase):
         data = {
             'from_id': 1,
             'to_id': 1,
-            'from_lat': from_lat,
-            'from_lon': from_lon,
-            'to_lat': to_lat,
-            'to_lon': to_lon,
+            'from_lat': fixture.from_lat_tucson,
+            'from_lon': fixture.from_lon_tucson,
+            'to_lat': fixture.to_lat_tucson,
+            'to_lon': fixture.to_lon_tucson,
             'purpose': 'W',
-            'day_of_week': 'WD',
-            'probabilities': utils.probability_list(),
         }
         with self.assertRaises(ValidationError) as context:
             activity = Activity.objects.create(**data)

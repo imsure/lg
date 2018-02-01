@@ -1,8 +1,8 @@
 from django.db import models
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 
-from .constants import PURPOSE_CHOICES, DAY_OF_WEEK_CHOICES, MODE_CHOICES
+from .constants import PURPOSE_CHOICES, DAY_OF_WEEK_CHOICES, TZ_CHOICES
 
 
 class Activity(models.Model):
@@ -11,15 +11,15 @@ class Activity(models.Model):
     """
 
     purpose = models.CharField('Purpose of activity', max_length=2, choices=PURPOSE_CHOICES)
-    day_of_week = models.CharField('Activity occurs in weekday or weekend',
-                                   max_length=2, choices=DAY_OF_WEEK_CHOICES)
-    from_id = models.BigIntegerField('ID of from location')
-    to_id = models.BigIntegerField('ID of to location')
+    from_id = models.IntegerField('ID of from location')
+    to_id = models.IntegerField('ID of to location')
     from_lat = models.FloatField('Start latitude')
     from_lon = models.FloatField('Start longitude')
     to_lat = models.FloatField('End latitude')
     to_lon = models.FloatField('End longitude')
-    probabilities = models.TextField('JSON format of probability values for 96 15-minute time slots')
+    # patterns = models.TextField('Activity patterns in JSON format')
+    walk_time = models.PositiveSmallIntegerField(blank=True, null=True)
+    bike_time = models.PositiveSmallIntegerField(blank=True, null=True)
 
     def clean(self):  # model-wide validation
         if self.from_id == self.to_id:
@@ -37,18 +37,24 @@ class Activity(models.Model):
 
 class TravelOption(models.Model):
     """
-    Available travel options for activities
+    Available travel options for an activity
     """
     # Django creates BTree index on foreignkey field by default
-    activity_id = models.ForeignKey(Activity, on_delete=models.CASCADE)
-    mode = models.CharField(max_length=2, choices=MODE_CHOICES)
-    wait_time = models.PositiveSmallIntegerField(default=0)
-    travel_time = models.PositiveSmallIntegerField()
-    # Use char field instead of int to adjust uber api's price range
-    cost = models.CharField(max_length=10, default='')
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    day_of_week = models.CharField('Activity occurs in which day',
+                                   max_length=2, choices=DAY_OF_WEEK_CHOICES)
     # Range: 1 to 96 for each time slot; other values are invalid
-    # 0 is a special value indicating the option is time independent (walking, biking, uberx and uberPool)
     slot_id = models.PositiveSmallIntegerField(
         'ID of time slot this option corresponds to',
-        default=0,
-        validators=[MaxValueValidator(96, 'slot_id must be in the range of 0 - 96')])
+        validators=[MinValueValidator(1), MaxValueValidator(96)]
+    )
+    tz = models.CharField('Time Zone', max_length=2, choices=TZ_CHOICES)
+    drive = models.CharField(max_length=100, blank=True, default='')
+    transit = models.CharField(max_length=200, blank=True, default='')
+    uber = models.CharField(max_length=200, blank=True, default='')
+
+    class Meta:
+        unique_together = ['activity', 'day_of_week', 'slot_id']
+        indexes = [
+            models.Index(fields=['day_of_week', 'slot_id', 'tz'], name='day_of_week_slot_tz_idx')
+        ]

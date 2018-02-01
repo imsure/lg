@@ -1,38 +1,34 @@
-from random import random
+import requests
+from .constants import TZ_OTP_ROUTER_MAP
+from .config import OTP_URL
 
 
-def unique_place_id():
-    place_id = 1
-    while True:
-        yield place_id
-        place_id += 1
+def otp_walk_bike_time(from_lat, from_lon, to_lat, to_lon, tz):
+    router = TZ_OTP_ROUTER_MAP[tz]
+    url = "{}/otp/routers/{}/plan".format(OTP_URL, router)
 
+    params = {
+        'fromPlace': '{},{}'.format(from_lat, from_lon),
+        'toPlace': '{},{}'.format(to_lat, to_lon),
+        'mode': 'WALK',
+        'arriveBy': 'false',
+        'wheelchair': 'false',
+        'locale': 'en',
+    }
 
-def probability_list(ret_format=None):
-    rand_data = []
-    for i in range(0, 96):
-        rand_data.append(random() * 100)
-    total = sum(rand_data)
+    r = requests.get(url, params=params)
+    decoded = r.json()
+    walk_time = None
+    if r.ok and 'plan' in decoded and 'itineraries' in decoded['plan']:
+        iti = decoded['plan']['itineraries'][0]
+        walk_time = iti['duration']
 
-    probabilities = [100 * p / total for p in rand_data]
-    if ret_format == 'str':
-        probabilities = ['{:.2f}'.format(p) for p in probabilities]
-        return ','.join(probabilities)
-    return probabilities
+    params['mode'] = 'BICYCLE'
+    r = requests.get(url, params=params)
+    decoded = r.json()
+    bike_time = None
+    if r.ok and 'plan' in decoded and 'itineraries' in decoded['plan']:
+        iti = decoded['plan']['itineraries'][0]
+        bike_time = iti['duration']
 
-
-if __name__ == '__main__':
-    place_id_seq = unique_place_id()
-    print(next(place_id_seq))
-    print(next(place_id_seq))
-    print(next(place_id_seq))
-    print(next(place_id_seq))
-
-    prob_list = probability_list(ret_format='str')
-    print(prob_list)
-    prob_list = [float(p) for p in prob_list.split(',')]
-    print(sum(prob_list))
-    print(len(prob_list))
-
-    prob_list = probability_list()
-    print(prob_list)
+    return walk_time, bike_time

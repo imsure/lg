@@ -1,18 +1,20 @@
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
 from rest_framework.authtoken.models import Token
 
-from .common import set_up_user
-
 
 class TokenAuthenticationTest(APITestCase):
-    url = reverse('create_activity')
+    url = reverse('activity_list')
 
     def setUp(self):
-        self.user = set_up_user()
-        self.token = Token.objects.create(user=self.user)
+        username = 'alex'
+        email = 'alex@hacker.com'
+        password = 'alex_knows_nothing'
+        user = User.objects.create_user(username, email, password)
+        self.token = Token.objects.create(user=user)
 
     def test_token_authentication(self):
         tokens = Token.objects.all()
