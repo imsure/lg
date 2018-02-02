@@ -38,11 +38,11 @@ def validate_probabilities(probabilities):
         prob_total += prob
 
     if prob_total < 99.9:
-        raise serializers.ValidationError('The total of 96 probability values must sum up to 100. '
-                                          'But the actual total is below 100, which is {}'.format(prob_total))
+        raise serializers.ValidationError('The total of 96 probability values must not below 100. '
+                                          'But the actual total {} is below 100.'.format(prob_total))
     if prob_total > 100.1:
         raise serializers.ValidationError('The total of 96 probability values must not above 100. '
-                                          'But the actual total is above 100, which is {}'.format(prob_total))
+                                          'But the actual total {} is above 100.'.format(prob_total))
 
 
 def validate_patterns(patterns):
@@ -115,8 +115,8 @@ def validate_drive_option(drive):
     """
     drive option should be in JSON format with two fields:
     {
-        'travel_time': 123 (in seconds),
-        'distance': 5.6 (in miles)
+        "travel_time": 123 (in seconds),
+        "distance": 5.6 (in miles)
     }
     """
     if 'travel_time' not in drive:
@@ -125,6 +125,10 @@ def validate_drive_option(drive):
     if 'distance' not in drive:
         raise serializers.ValidationError("distance is missing in the drive option.")
 
+    if len(drive.keys()) != 2:
+        raise serializers.ValidationError("drive option should contain exactly two fields. "
+                                          "But {} fields are given.".format(len(drive.keys())))
+
     travel_time = drive['travel_time']
     distance = drive['distance']
     check_if_int_or_float(travel_time, 'travel_time')
@@ -132,17 +136,68 @@ def validate_drive_option(drive):
 
 
 def validate_transit_option(transit):
-    pass
+    """
+    transit option should be in JSON format with five fields:
+    {
+        "travel_time": 123 (in seconds),
+        "wait_time": 456 (in seconds),
+        "cost": 78 (in cents),
+        "walk_time_ingress": 89 (in seconds),
+        "walk_time_egress": 90 (in seconds)
+    }
+    """
+    if 'travel_time' not in transit:
+        raise serializers.ValidationError("travel_time is missing in the transit option.")
+
+    if 'wait_time' not in transit:
+        raise serializers.ValidationError("wait_time is missing in the transit option.")
+
+    if 'cost' not in transit:
+        raise serializers.ValidationError("cost is missing in the transit option.")
+
+    if 'walk_time_ingress' not in transit:
+        raise serializers.ValidationError("walk_time_ingress is missing in the transit option.")
+
+    if 'walk_time_egress' not in transit:
+        raise serializers.ValidationError("walk_time_egress is missing in the transit option.")
+
+    if len(transit.keys()) != 5:
+        raise serializers.ValidationError("transit option should contain exactly five fields. "
+                                          "But {} fields are given.".format(len(transit.keys())))
+
+    check_if_int_or_float(transit['travel_time'], 'travel_time')
+    check_if_int_or_float(transit['wait_time'], 'wait_time')
+    check_if_int_or_float(transit['cost'], 'cost')
+    check_if_int_or_float(transit['walk_time_ingress'], 'walk_time_ingress')
+    check_if_int_or_float(transit['walk_time_egress'], 'walk_time_egress')
 
 
 def validate_uber_option(uber):
-    pass
+    """
+    uber option should be in JSON format with two fields:
+    {
+        "travel_time": 123 (in seconds),
+        "wait_time": 456 (in seconds),
+        "cost": "$7-10" (string)
+    }
+    """
+    if 'travel_time' not in uber:
+        raise serializers.ValidationError("travel_time is missing in the uber option.")
+
+    if 'wait_time' not in uber:
+        raise serializers.ValidationError("wait_time is missing in the uber option.")
+
+    if 'cost' not in uber:
+        raise serializers.ValidationError("cost is missing in the uber option.")
+
+    check_if_int_or_float(uber['travel_time'], 'travel_time')
+    check_if_int_or_float(uber['wait_time'], 'wait_time')
 
 
 class TravelOptionUpdateSerializer(serializers.ModelSerializer):
     drive = serializers.JSONField(validators=[validate_drive_option])
-    transit = serializers.JSONField()
-    uber = serializers.JSONField()
+    transit = serializers.JSONField(validators=[validate_transit_option])
+    uber = serializers.JSONField(validators=[validate_uber_option])
 
     class Meta:
         model = TravelOption
