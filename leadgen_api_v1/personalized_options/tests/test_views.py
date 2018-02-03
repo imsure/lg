@@ -679,6 +679,70 @@ class ActivityViewTest(APITestCase):
             option_obj = TravelOption.objects.get(pk=option['id'])
             self.assertIn("cost': '$4-6'", option_obj.uber)
 
+    def test_update_travel_options_uber_uberxonly(self):
+        """
+        Update of a uber option with only uberx option should be successful.
+        """
+        from_id = next(place_id_iter)
+        to_id = next(place_id_iter)
+        activity = activity_tucson()
+
+        client = APIClient()
+        client.force_authenticate(user=self.user)
+        r = client.put(reverse('create_update_activity', kwargs={'from_id': from_id, 'to_id': to_id}),
+                       activity, format='json')
+        self.assertEqual(r.status_code, status.HTTP_201_CREATED)
+
+        r = client.get(reverse('travel_options_by_day_of_week', kwargs={'day_of_week': const.WEEKDAY}))
+        self.assertEqual(r.status_code, status.HTTP_200_OK)
+
+        travel_options = json.loads(r.content.decode('utf-8'))
+        self.assertEqual(len(travel_options), 3)
+        uber = {
+            'uber': {
+                'uberx': {'travel_time': 240, 'wait_time': 20, 'cost': '$4-6'},
+            },
+        }
+        for option in travel_options:
+            r = client.put(reverse('update_travel_options', kwargs={'pk': option['id']}), uber, format='json')
+            self.assertEqual(r.status_code, status.HTTP_200_OK)
+            self.assertIn('uber', r.content.decode('utf-8'))
+            self.assertIn('cost', json.loads(r.content.decode('utf-8'))['uber']['uberx'])
+            self.assertNotIn('uberpool', r.content.decode('utf-8'))
+
+            option_obj = TravelOption.objects.get(pk=option['id'])
+            self.assertIn("cost': '$4-6'", option_obj.uber)
+
+    def test_update_travel_options_uber_invalid(self):
+        """
+        Update of a invalid uber option should be denied.
+        """
+        from_id = next(place_id_iter)
+        to_id = next(place_id_iter)
+        activity = activity_tucson()
+
+        client = APIClient()
+        client.force_authenticate(user=self.user)
+        r = client.put(reverse('create_update_activity', kwargs={'from_id': from_id, 'to_id': to_id}),
+                       activity, format='json')
+        self.assertEqual(r.status_code, status.HTTP_201_CREATED)
+
+        r = client.get(reverse('travel_options_by_day_of_week', kwargs={'day_of_week': const.WEEKDAY}))
+        self.assertEqual(r.status_code, status.HTTP_200_OK)
+
+        travel_options = json.loads(r.content.decode('utf-8'))
+        self.assertEqual(len(travel_options), 3)
+        uber = {
+            'uber': {
+                'ubernotx': {'travel_time': 240, 'wait_time': 20, 'cost': '$4-6'},
+                'ubernotpool': {'travel_time': 480, 'wait_time': 40, 'cost': '$8-10'},
+            },
+        }
+        for option in travel_options:
+            r = client.put(reverse('update_travel_options', kwargs={'pk': option['id']}), uber, format='json')
+            self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
+            self.assertRegex(r.content.decode('utf-8'), 'Neither uberx or uberpool are in the uber option')
+
     def test_update_travel_options_drive_transit(self):
         """
         Update of a valid drive and transit options together should be successful.
