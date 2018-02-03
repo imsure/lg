@@ -8,6 +8,9 @@ register_converter(converters.TimezoneConverter, 'timezone')
 urlpatterns = [
     path(r'activity/', views.activity_list, name='activity_list'),
     path(r'activity/<int:pk>/', views.activity_detail, name='activity_detail'),
+    path(r'activity/<int:pk>/<int:walk_time>/<int:bike_time>/',
+         views.activity_walk_bike_time_update,
+         name='activity_walk_bike_time_update'),
     path(r'activity/<int:from_id>/<int:to_id>/',
          views.create_update_activity,
          name='create_update_activity'),

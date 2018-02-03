@@ -26,6 +26,16 @@ def activity_detail(request, pk):
 
 @api_view(['PUT'])
 @permission_classes((permissions.IsAuthenticated,))
+def activity_walk_bike_time_update(request, pk, walk_time, bike_time):
+    activity = Activity.objects.get(pk=pk)
+    activity.walk_time = walk_time
+    activity.bike_time = bike_time
+    activity.save()
+    return Response({'walk_time': walk_time, 'bike_time': bike_time}, status=status.HTTP_200_OK)
+
+
+@api_view(['PUT'])
+@permission_classes((permissions.IsAuthenticated,))
 def create_update_activity(request, from_id, to_id):
     if from_id == to_id:  # prevent request like /activity/1/1/
         return Response(

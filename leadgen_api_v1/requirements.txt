@@ -2,3 +2,6 @@ Django==2.0
 djangorestframework==3.7.7
 requests==2.18.4
 timezonefinder==2.1.2
+coreapi==2.3.3
+pygments==2.2.0
+markdown==2.6.11

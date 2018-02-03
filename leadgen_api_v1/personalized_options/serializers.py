@@ -107,8 +107,8 @@ class TravelOptionRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TravelOption
-        fields = ('id', 'activity', 'slot_id',)
-        read_only_fields = ('id', 'activity', 'slot_id',)
+        fields = ('id', 'activity', 'slot_id', 'tz',)
+        read_only_fields = ('id', 'activity', 'slot_id', 'tz',)
 
 
 def validate_drive_option(drive):
