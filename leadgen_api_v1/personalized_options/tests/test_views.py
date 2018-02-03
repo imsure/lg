@@ -664,12 +664,17 @@ class ActivityViewTest(APITestCase):
 
         travel_options = json.loads(r.content.decode('utf-8'))
         self.assertEqual(len(travel_options), 3)
-        uber = {'uber': {'travel_time': 240, 'wait_time': 20, 'cost': '$4-6'}}
+        uber = {
+            'uber': {
+                'uberx': {'travel_time': 240, 'wait_time': 20, 'cost': '$4-6'},
+                'uberpool': {'travel_time': 480, 'wait_time': 40, 'cost': '$8-10'},
+            },
+        }
         for option in travel_options:
             r = client.put(reverse('update_travel_options', kwargs={'pk': option['id']}), uber, format='json')
             self.assertEqual(r.status_code, status.HTTP_200_OK)
             self.assertIn('uber', r.content.decode('utf-8'))
-            self.assertIn('cost', json.loads(r.content.decode('utf-8'))['uber'])
+            self.assertIn('cost', json.loads(r.content.decode('utf-8'))['uber']['uberx'])
 
             option_obj = TravelOption.objects.get(pk=option['id'])
             self.assertIn("cost': '$4-6'", option_obj.uber)
@@ -760,10 +765,15 @@ class ActivityViewTest(APITestCase):
 
         travel_options = json.loads(r.content.decode('utf-8'))
         self.assertEqual(len(travel_options), 3)
-        modes = {'transit': {'travel_time': 240, 'wait_time': 2, 'cost': 125,
-                             'walk_time_ingress': 44, 'walk_time_egress': 55},
-                 'drive': {'travel_time': 240, 'distance': 2},
-                 'uber': {'travel_time': 240, 'wait_time': 20, 'cost': '$4-6'}}
+        modes = {
+            'transit': {'travel_time': 240, 'wait_time': 2, 'cost': 125,
+                        'walk_time_ingress': 44, 'walk_time_egress': 55},
+            'drive': {'travel_time': 240, 'distance': 2},
+            'uber': {
+                'uberx': {'travel_time': 240, 'wait_time': 20, 'cost': '$4-6'},
+                'uberpool': {'travel_time': 480, 'wait_time': 40, 'cost': '$8-10'},
+            },
+        }
         for option in travel_options:
             r = client.put(reverse('update_travel_options', kwargs={'pk': option['id']}), modes, format='json')
             self.assertEqual(r.status_code, status.HTTP_200_OK)
@@ -779,8 +789,8 @@ class ActivityViewTest(APITestCase):
             self.assertEqual(type(options_dict), dict)
             self.assertEqual(options_dict['drive']['distance'], 2)
             self.assertEqual(options_dict['transit']['cost'], 125)
-            self.assertEqual(options_dict['uber']['wait_time'], 20)
-            self.assertEqual(options_dict['uber']['cost'], '$4-6')
+            self.assertEqual(options_dict['uber']['uberx']['wait_time'], 20)
+            self.assertEqual(options_dict['uber']['uberpool']['cost'], '$8-10')
 
     def test_get_personalized_options_same_from_id_to_id(self):
         """

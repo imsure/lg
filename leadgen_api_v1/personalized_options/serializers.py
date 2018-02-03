@@ -172,9 +172,9 @@ def validate_transit_option(transit):
     check_if_int_or_float(transit['walk_time_egress'], 'walk_time_egress')
 
 
-def validate_uber_option(uber):
+def validate_sububer_option(uber):
     """
-    uber option should be in JSON format with two fields:
+    sub-uber option should be in JSON format with two fields:
     {
         "travel_time": 123 (in seconds),
         "wait_time": 456 (in seconds),
@@ -192,6 +192,24 @@ def validate_uber_option(uber):
 
     check_if_int_or_float(uber['travel_time'], 'travel_time')
     check_if_int_or_float(uber['wait_time'], 'wait_time')
+
+
+def validate_uber_option(uber):
+    """
+    sub-uber option should be in JSON format with two fields:
+    {
+        "uberx": {'travel_time': 123, 'wait_time': 456, 'cost': "$1-2"},
+        "uberpool": {'travel_time': 123, 'wait_time': 456, 'cost': "$1-2"},
+    }
+    """
+    if 'uberx' not in uber and 'uberpool' not in uber:
+        raise serializers.ValidationError("Neither uberx or uberpool are in the uber option.")
+
+    if 'uberx' in uber:
+        validate_sububer_option(uber['uberx'])
+
+    if 'uberpool' in uber:
+        validate_sububer_option(uber['uberpool'])
 
 
 class TravelOptionUpdateSerializer(serializers.ModelSerializer):
