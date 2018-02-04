@@ -155,7 +155,6 @@ def uber_updater():
             if uber_option:  # empty dict {} evaluate to be False
                 modes['uber'] = uber_option
 
-            print(modes)
             if modes:  # empty dict {} evaluate to be False
                 r = requests.put(secrets.LEADGEN_URL + 'travel_options/{}/'.format(option['id']),
                                  json=modes, headers=headers)
