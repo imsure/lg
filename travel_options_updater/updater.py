@@ -78,11 +78,10 @@ def parade_otp_updater():
         if activity['walk_time'] is None or activity['walk_time'] is None:
             walk_time = proxy.otp_walk_bike(mode='WALK')
             bike_time = proxy.otp_walk_bike(mode='BICYCLE')
-            print(walk_time, bike_time)
             r = requests.put(secrets.LEADGEN_URL + 'activity/{}/{}/{}/'.format(activity_id, walk_time, bike_time),
                              headers=headers)
             if r.status_code == 200:
-                print(r.json())
+                print('Updated walk_time & bike_time for activity {}.'.format(activity_id))
                 activity['walk_time'] = walk_time
                 activity['bike_time'] = bike_time
 
@@ -96,10 +95,11 @@ def parade_otp_updater():
         if transit_option is not None:
             modes['transit'] = transit_option
 
-        print(modes)
         if modes:  # empty dict {} evaluate to be False
             r = requests.put(secrets.LEADGEN_URL + 'travel_options/{}/'.format(option['id']),
                              json=modes, headers=headers)
+            if r.ok and r.status_code == 200:
+                print('Updated driving & transit fields for option {}.'.format(option['id']))
             if not r.ok:
                 pass  # TODO: log the message
 
@@ -123,10 +123,9 @@ def uber_updater():
     for tz, tz_name in const.TIMEZONE_DICT.items():
         now_local = now_utc.astimezone(pytz.timezone(tz_name))
         slot_id = utils.minutes2slot_id(now_local.hour * 60 + now_local.minute)
-        print('Local Time at {}: {}, {}'.format(tz_name, const.DAY_OF_WEEK_MAP[now_local.weekday()],
-                                                now_local.strftime(fmt)))
-        print('slot ID: ', slot_id)
         day_of_week_exact = const.DAY_OF_WEEK_MAP[now_local.weekday()]
+        print('Local Time at {}: {}, {} (slot: {})'.format(tz_name, day_of_week_exact,
+                                                           now_local.strftime(fmt), slot_id))
         if now_local.weekday() <= 4:
             day_of_week_general = const.WEEKDAY
         else:
@@ -139,7 +138,7 @@ def uber_updater():
                           format(day_of_week_general, slot_id, tz), headers=headers)
 
         travel_options = r1.json() + r2.json()
-        print('# of uber options to be updated: {}'.format(len(travel_options)))
+        # print('# of uber options to be updated: {}'.format(len(travel_options)))
         activity_dict = {}
         for option in travel_options:
             activity_id = option['activity']
@@ -160,6 +159,7 @@ def uber_updater():
             if modes:  # empty dict {} evaluate to be False
                 r = requests.put(secrets.LEADGEN_URL + 'travel_options/{}/'.format(option['id']),
                                  json=modes, headers=headers)
-                print(r.status_code)
+                if r.ok and r.status_code == 200:
+                    print('Updated uber field for option {}.'.format(option['id']))
                 if not r.ok:
                     pass  # TODO: log the message
