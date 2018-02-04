@@ -1,0 +1,32 @@
+{
+  "elevationMetadata": {
+    "geoidElevation": false,
+    "ellipsoidToGeoidDifference": -30.404644369643396
+  },
+  "debugOutput": {
+    "timedOut": false,
+    "totalTime": 3,
+    "renderingTime": 0,
+    "pathTimes": [],
+    "pathCalculationTime": 0,
+    "precalculationTime": 3
+  },
+  "error": {
+    "noPath": true,
+    "message": "PATH_NOT_FOUND",
+    "msg": "No trip found. There may be no transit service within the maximum specified distance or at the specified time, or your start or end point might not be safely accessible.",
+    "id": 404
+  },
+  "requestParameters": {
+    "locale": "en",
+    "date": "1-2-2018",
+    "mode": "TRANSIT,WALK",
+    "arriveBy": "false",
+    "wheelchair": "false",
+    "fromPlace": "32.1748743,-110.8936878",
+    "toPlace": "32.2866043,-110.9473657",
+    "time": "8:30am",
+    "maxWalkDistance": "804.672"
+  }
+}
+200

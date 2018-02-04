@@ -1,0 +1,775 @@
+{
+  "elevationMetadata": {
+    "geoidElevation": false,
+    "ellipsoidToGeoidDifference": -30.404644369643396
+  },
+  "debugOutput": {
+    "timedOut": false,
+    "totalTime": 26,
+    "renderingTime": 1,
+    "pathTimes": [
+      5,
+      5,
+      3
+    ],
+    "pathCalculationTime": 13,
+    "precalculationTime": 12
+  },
+  "plan": {
+    "itineraries": [
+      {
+        "tooSloped": false,
+        "legs": [
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 32.2315930248697,
+                "distance": 39.962,
+                "relativeDirection": "DEPART",
+                "streetName": "path",
+                "absoluteDirection": "WEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.95658391387519
+              },
+              {
+                "elevation": [],
+                "lat": 32.231788800000004,
+                "distance": 10.527,
+                "relativeDirection": "LEFT",
+                "streetName": "North Park Avenue",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.95677880000001
+              },
+              {
+                "elevation": [],
+                "lat": 32.2316947,
+                "distance": 139.53,
+                "relativeDirection": "RIGHT",
+                "streetName": "East University Boulevard",
+                "absoluteDirection": "WEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.9567665
+              }
+            ],
+            "duration": 168,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 190.019,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514993879000,
+            "startTime": 1514993711000,
+            "route": "",
+            "agencyTimeZoneOffset": -25200000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "NORMAL",
+              "orig": "",
+              "departure": 1514993711000,
+              "lat": 32.2315175,
+              "lon": -110.9565735,
+              "name": "Origin"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 5,
+              "name": "SL/University/Tyndall",
+              "stopId": "1:16185",
+              "stopCode": "UNTY(CR)",
+              "lon": -110.958237,
+              "lat": 32.231679,
+              "arrival": 1514993879000,
+              "departure": 1514993880000,
+              "stopIndex": 4
+            },
+            "legGeometry": {
+              "length": 16,
+              "points": "mfvcEtefdT@Lg@??D?PPA?X?f@?~@?|A?JBD@F?B?\\?H"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          },
+          {
+            "steps": [],
+            "duration": 480,
+            "transitLeg": true,
+            "rentedBike": false,
+            "routeLongName": "Sun Link",
+            "routeShortName": "700",
+            "legGeometry": {
+              "length": 39,
+              "points": "_gvcE~ofdT?jF?J?J@hH@vCAzCBrC?zC?bAAxA@rCbGA~B?fC?xFCH?H?`EAr@???jGEnEDH?h@CjFfA??b@JPDJFHL??FLFHJHD|CDxC?BDbB"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 10,
+              "name": "SL/Congress/6th Av",
+              "stopId": "1:14516",
+              "stopCode": "CO6A(SE)",
+              "lon": -110.968364,
+              "lat": 32.221964,
+              "arrival": 1514994360000,
+              "departure": 1514994361000,
+              "stopIndex": 9
+            },
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 5,
+              "name": "SL/University/Tyndall",
+              "stopId": "1:16185",
+              "stopCode": "UNTY(CR)",
+              "lon": -110.958237,
+              "lat": 32.231679,
+              "arrival": 1514993879000,
+              "departure": 1514993880000,
+              "stopIndex": 4
+            },
+            "serviceDate": "20180103",
+            "tripId": "1:1770950",
+            "agencyId": "SunTran",
+            "headsign": "AV DEL CONVENTO",
+            "tripBlockId": "427325",
+            "interlineWithPreviousLeg": false,
+            "mode": "TRAM",
+            "pathway": false,
+            "distance": 1805.3882858142615,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514994360000,
+            "startTime": 1514993880000,
+            "route": "700",
+            "agencyName": "SunTran",
+            "agencyUrl": "http://www.suntran.com",
+            "agencyTimeZoneOffset": -25200000,
+            "routeColor": "000000",
+            "routeType": 900,
+            "routeId": "1:14902",
+            "routeTextColor": "FFFFFF"
+          },
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 32.22202643728818,
+                "distance": 122.628,
+                "relativeDirection": "DEPART",
+                "streetName": "East Congress Street",
+                "absoluteDirection": "EAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.96836717356771
+              },
+              {
+                "elevation": [],
+                "lat": 32.2220776,
+                "distance": 96.573,
+                "relativeDirection": "RIGHT",
+                "streetName": "South 5th Avenue",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.96706510000001
+              },
+              {
+                "elevation": [],
+                "lat": 32.2212091,
+                "distance": 72.728,
+                "relativeDirection": "LEFT",
+                "streetName": "East Broadway Boulevard",
+                "absoluteDirection": "EAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.96706160000001
+              },
+              {
+                "elevation": [],
+                "lat": 32.221203800000005,
+                "distance": 68.052,
+                "relativeDirection": "LEFT",
+                "streetName": "road",
+                "absoluteDirection": "NORTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": true,
+                "lon": -110.9662885
+              }
+            ],
+            "duration": 288,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 359.981,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514994649000,
+            "startTime": 1514994361000,
+            "route": "",
+            "agencyTimeZoneOffset": -25200000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 10,
+              "name": "SL/Congress/6th Av",
+              "stopId": "1:14516",
+              "stopCode": "CO6A(SE)",
+              "lon": -110.968364,
+              "lat": 32.221964,
+              "arrival": 1514994360000,
+              "departure": 1514994361000,
+              "stopIndex": 9
+            },
+            "to": {
+              "vertexType": "NORMAL",
+              "orig": "",
+              "arrival": 1514994649000,
+              "lat": 32.22188,
+              "lon": -110.96612,
+              "name": "Destination"
+            },
+            "legGeometry": {
+              "length": 7,
+              "points": "sjtcEhohdTAYCoACyClD??{CyB@"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          }
+        ],
+        "transfers": 0,
+        "elevationGained": 0,
+        "elevationLost": 0,
+        "duration": 938,
+        "startTime": 1514993711000,
+        "endTime": 1514994649000,
+        "walkTime": 456,
+        "transitTime": 480,
+        "waitingTime": 2,
+        "walkDistance": 550.2706766829953,
+        "walkLimitExceeded": false
+      },
+      {
+        "tooSloped": false,
+        "legs": [
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 32.2315930248697,
+                "distance": 39.962,
+                "relativeDirection": "DEPART",
+                "streetName": "path",
+                "absoluteDirection": "WEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.95658391387519
+              },
+              {
+                "elevation": [],
+                "lat": 32.231788800000004,
+                "distance": 10.527,
+                "relativeDirection": "LEFT",
+                "streetName": "North Park Avenue",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.95677880000001
+              },
+              {
+                "elevation": [],
+                "lat": 32.2316947,
+                "distance": 139.53,
+                "relativeDirection": "RIGHT",
+                "streetName": "East University Boulevard",
+                "absoluteDirection": "WEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.9567665
+              }
+            ],
+            "duration": 168,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 190.019,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514994599000,
+            "startTime": 1514994431000,
+            "route": "",
+            "agencyTimeZoneOffset": -25200000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "NORMAL",
+              "orig": "",
+              "departure": 1514994431000,
+              "lat": 32.2315175,
+              "lon": -110.9565735,
+              "name": "Origin"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 5,
+              "name": "SL/University/Tyndall",
+              "stopId": "1:16185",
+              "stopCode": "UNTY(CR)",
+              "lon": -110.958237,
+              "lat": 32.231679,
+              "arrival": 1514994599000,
+              "departure": 1514994600000,
+              "stopIndex": 4
+            },
+            "legGeometry": {
+              "length": 16,
+              "points": "mfvcEtefdT@Lg@??D?PPA?X?f@?~@?|A?JBD@F?B?\\?H"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          },
+          {
+            "steps": [],
+            "duration": 480,
+            "transitLeg": true,
+            "rentedBike": false,
+            "routeLongName": "Sun Link",
+            "routeShortName": "700",
+            "legGeometry": {
+              "length": 39,
+              "points": "_gvcE~ofdT?jF?J?J@hH@vCAzCBrC?zC?bAAxA@rCbGA~B?fC?xFCH?H?`EAr@???jGEnEDH?h@CjFfA??b@JPDJFHL??FLFHJHD|CDxC?BDbB"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 10,
+              "name": "SL/Congress/6th Av",
+              "stopId": "1:14516",
+              "stopCode": "CO6A(SE)",
+              "lon": -110.968364,
+              "lat": 32.221964,
+              "arrival": 1514995080000,
+              "departure": 1514995081000,
+              "stopIndex": 9
+            },
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 5,
+              "name": "SL/University/Tyndall",
+              "stopId": "1:16185",
+              "stopCode": "UNTY(CR)",
+              "lon": -110.958237,
+              "lat": 32.231679,
+              "arrival": 1514994599000,
+              "departure": 1514994600000,
+              "stopIndex": 4
+            },
+            "serviceDate": "20180103",
+            "tripId": "1:1770949",
+            "agencyId": "SunTran",
+            "headsign": "AV DEL CONVENTO",
+            "tripBlockId": "427324",
+            "interlineWithPreviousLeg": false,
+            "mode": "TRAM",
+            "pathway": false,
+            "distance": 1805.3882858142615,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514995080000,
+            "startTime": 1514994600000,
+            "route": "700",
+            "agencyName": "SunTran",
+            "agencyUrl": "http://www.suntran.com",
+            "agencyTimeZoneOffset": -25200000,
+            "routeColor": "000000",
+            "routeType": 900,
+            "routeId": "1:14902",
+            "routeTextColor": "FFFFFF"
+          },
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 32.22202643728818,
+                "distance": 122.628,
+                "relativeDirection": "DEPART",
+                "streetName": "East Congress Street",
+                "absoluteDirection": "EAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.96836717356771
+              },
+              {
+                "elevation": [],
+                "lat": 32.2220776,
+                "distance": 96.573,
+                "relativeDirection": "RIGHT",
+                "streetName": "South 5th Avenue",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.96706510000001
+              },
+              {
+                "elevation": [],
+                "lat": 32.2212091,
+                "distance": 72.728,
+                "relativeDirection": "LEFT",
+                "streetName": "East Broadway Boulevard",
+                "absoluteDirection": "EAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.96706160000001
+              },
+              {
+                "elevation": [],
+                "lat": 32.221203800000005,
+                "distance": 68.052,
+                "relativeDirection": "LEFT",
+                "streetName": "road",
+                "absoluteDirection": "NORTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": true,
+                "lon": -110.9662885
+              }
+            ],
+            "duration": 288,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 359.981,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514995369000,
+            "startTime": 1514995081000,
+            "route": "",
+            "agencyTimeZoneOffset": -25200000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 10,
+              "name": "SL/Congress/6th Av",
+              "stopId": "1:14516",
+              "stopCode": "CO6A(SE)",
+              "lon": -110.968364,
+              "lat": 32.221964,
+              "arrival": 1514995080000,
+              "departure": 1514995081000,
+              "stopIndex": 9
+            },
+            "to": {
+              "vertexType": "NORMAL",
+              "orig": "",
+              "arrival": 1514995369000,
+              "lat": 32.22188,
+              "lon": -110.96612,
+              "name": "Destination"
+            },
+            "legGeometry": {
+              "length": 7,
+              "points": "sjtcEhohdTAYCoACyClD??{CyB@"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          }
+        ],
+        "transfers": 0,
+        "elevationGained": 0,
+        "elevationLost": 0,
+        "duration": 938,
+        "startTime": 1514994431000,
+        "endTime": 1514995369000,
+        "walkTime": 456,
+        "transitTime": 480,
+        "waitingTime": 2,
+        "walkDistance": 550.2706766829953,
+        "walkLimitExceeded": false
+      },
+      {
+        "tooSloped": false,
+        "legs": [
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 32.2315930248697,
+                "distance": 39.962,
+                "relativeDirection": "DEPART",
+                "streetName": "path",
+                "absoluteDirection": "WEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.95658391387519
+              },
+              {
+                "elevation": [],
+                "lat": 32.231788800000004,
+                "distance": 10.527,
+                "relativeDirection": "LEFT",
+                "streetName": "North Park Avenue",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.95677880000001
+              },
+              {
+                "elevation": [],
+                "lat": 32.2316947,
+                "distance": 139.53,
+                "relativeDirection": "RIGHT",
+                "streetName": "East University Boulevard",
+                "absoluteDirection": "WEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.9567665
+              }
+            ],
+            "duration": 168,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 190.019,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514995139000,
+            "startTime": 1514994971000,
+            "route": "",
+            "agencyTimeZoneOffset": -25200000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "NORMAL",
+              "orig": "",
+              "departure": 1514994971000,
+              "lat": 32.2315175,
+              "lon": -110.9565735,
+              "name": "Origin"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 5,
+              "name": "SL/University/Tyndall",
+              "stopId": "1:16185",
+              "stopCode": "UNTY(CR)",
+              "lon": -110.958237,
+              "lat": 32.231679,
+              "arrival": 1514995139000,
+              "departure": 1514995140000,
+              "stopIndex": 4
+            },
+            "legGeometry": {
+              "length": 16,
+              "points": "mfvcEtefdT@Lg@??D?PPA?X?f@?~@?|A?JBD@F?B?\\?H"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          },
+          {
+            "steps": [],
+            "duration": 480,
+            "transitLeg": true,
+            "rentedBike": false,
+            "routeLongName": "Sun Link",
+            "routeShortName": "700",
+            "legGeometry": {
+              "length": 39,
+              "points": "_gvcE~ofdT?jF?J?J@hH@vCAzCBrC?zC?bAAxA@rCbGA~B?fC?xFCH?H?`EAr@???jGEnEDH?h@CjFfA??b@JPDJFHL??FLFHJHD|CDxC?BDbB"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 10,
+              "name": "SL/Congress/6th Av",
+              "stopId": "1:14516",
+              "stopCode": "CO6A(SE)",
+              "lon": -110.968364,
+              "lat": 32.221964,
+              "arrival": 1514995620000,
+              "departure": 1514995621000,
+              "stopIndex": 9
+            },
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 5,
+              "name": "SL/University/Tyndall",
+              "stopId": "1:16185",
+              "stopCode": "UNTY(CR)",
+              "lon": -110.958237,
+              "lat": 32.231679,
+              "arrival": 1514995139000,
+              "departure": 1514995140000,
+              "stopIndex": 4
+            },
+            "serviceDate": "20180103",
+            "tripId": "1:1770948",
+            "agencyId": "SunTran",
+            "headsign": "AV DEL CONVENTO",
+            "tripBlockId": "427322",
+            "interlineWithPreviousLeg": false,
+            "mode": "TRAM",
+            "pathway": false,
+            "distance": 1805.3882858142615,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514995620000,
+            "startTime": 1514995140000,
+            "route": "700",
+            "agencyName": "SunTran",
+            "agencyUrl": "http://www.suntran.com",
+            "agencyTimeZoneOffset": -25200000,
+            "routeColor": "000000",
+            "routeType": 900,
+            "routeId": "1:14902",
+            "routeTextColor": "FFFFFF"
+          },
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 32.22202643728818,
+                "distance": 122.628,
+                "relativeDirection": "DEPART",
+                "streetName": "East Congress Street",
+                "absoluteDirection": "EAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.96836717356771
+              },
+              {
+                "elevation": [],
+                "lat": 32.2220776,
+                "distance": 96.573,
+                "relativeDirection": "RIGHT",
+                "streetName": "South 5th Avenue",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.96706510000001
+              },
+              {
+                "elevation": [],
+                "lat": 32.2212091,
+                "distance": 72.728,
+                "relativeDirection": "LEFT",
+                "streetName": "East Broadway Boulevard",
+                "absoluteDirection": "EAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -110.96706160000001
+              },
+              {
+                "elevation": [],
+                "lat": 32.221203800000005,
+                "distance": 68.052,
+                "relativeDirection": "LEFT",
+                "streetName": "road",
+                "absoluteDirection": "NORTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": true,
+                "lon": -110.9662885
+              }
+            ],
+            "duration": 288,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 359.981,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514995909000,
+            "startTime": 1514995621000,
+            "route": "",
+            "agencyTimeZoneOffset": -25200000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 10,
+              "name": "SL/Congress/6th Av",
+              "stopId": "1:14516",
+              "stopCode": "CO6A(SE)",
+              "lon": -110.968364,
+              "lat": 32.221964,
+              "arrival": 1514995620000,
+              "departure": 1514995621000,
+              "stopIndex": 9
+            },
+            "to": {
+              "vertexType": "NORMAL",
+              "orig": "",
+              "arrival": 1514995909000,
+              "lat": 32.22188,
+              "lon": -110.96612,
+              "name": "Destination"
+            },
+            "legGeometry": {
+              "length": 7,
+              "points": "sjtcEhohdTAYCoACyClD??{CyB@"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          }
+        ],
+        "transfers": 0,
+        "elevationGained": 0,
+        "elevationLost": 0,
+        "duration": 938,
+        "startTime": 1514994971000,
+        "endTime": 1514995909000,
+        "walkTime": 456,
+        "transitTime": 480,
+        "waitingTime": 2,
+        "walkDistance": 550.2706766829953,
+        "walkLimitExceeded": false
+      }
+    ],
+    "to": {
+      "vertexType": "NORMAL",
+      "orig": "",
+      "lat": 32.22188,
+      "lon": -110.96612,
+      "name": "Destination"
+    },
+    "from": {
+      "vertexType": "NORMAL",
+      "orig": "",
+      "lat": 32.2315175,
+      "lon": -110.9565735,
+      "name": "Origin"
+    },
+    "date": 1514993400000
+  },
+  "requestParameters": {
+    "locale": "en",
+    "mode": "TRANSIT,WALK",
+    "date": "1-3-2018",
+    "wheelchair": "false",
+    "arriveBy": "false",
+    "fromPlace": "32.2315175,-110.9565735",
+    "toPlace": "32.22188, -110.96612",
+    "maxWalkDistance": "804.672",
+    "time": "8:30am"
+  }
+}
+200

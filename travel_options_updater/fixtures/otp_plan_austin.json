@@ -1,0 +1,1169 @@
+{
+  "elevationMetadata": {
+    "geoidElevation": false,
+    "ellipsoidToGeoidDifference": -24.805391951951087
+  },
+  "debugOutput": {
+    "timedOut": false,
+    "totalTime": 46,
+    "renderingTime": 0,
+    "pathTimes": [
+      8,
+      10,
+      8
+    ],
+    "pathCalculationTime": 26,
+    "precalculationTime": 20
+  },
+  "plan": {
+    "itineraries": [
+      {
+        "tooSloped": false,
+        "legs": [
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 30.285974925613107,
+                "distance": 6.733,
+                "relativeDirection": "DEPART",
+                "streetName": "path",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.74042452903532
+              },
+              {
+                "elevation": [],
+                "lat": 30.285914400000003,
+                "distance": 164.65500000000003,
+                "relativeDirection": "RIGHT",
+                "streetName": "West Mall",
+                "absoluteDirection": "WEST",
+                "stayOn": false,
+                "area": true,
+                "bogusName": false,
+                "lon": -97.7404266
+              },
+              {
+                "elevation": [],
+                "lat": 30.285884300000003,
+                "distance": 19.395,
+                "relativeDirection": "RIGHT",
+                "streetName": "Guadalupe Street",
+                "absoluteDirection": "NORTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.74172890000001
+              }
+            ],
+            "duration": 220,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 190.78300000000004,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514990039000,
+            "startTime": 1514989819000,
+            "route": "",
+            "agencyTimeZoneOffset": -21600000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "NORMAL",
+              "orig": "",
+              "departure": 1514989819000,
+              "lat": 30.2859758,
+              "lon": -97.7404588,
+              "name": "Origin"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 13,
+              "name": "UT West Mall Station (SB)",
+              "stopId": "1:497",
+              "stopCode": "497",
+              "lon": -97.741815,
+              "lat": 30.286064,
+              "arrival": 1514990039000,
+              "departure": 1514990040000,
+              "stopIndex": 12
+            },
+            "legGeometry": {
+              "length": 21,
+              "points": "ifzwDt|psQJ?Cx@I?ATEdAD??BB@ARC??@GAANEA?XR@NRD@ARa@A"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          },
+          {
+            "steps": [],
+            "duration": 300,
+            "transitLeg": true,
+            "rentedBike": false,
+            "routeLongName": "Burnet/S Lamar",
+            "routeShortName": "803",
+            "legGeometry": {
+              "length": 23,
+              "points": "yfzwDxdqsQ^BpDLnFRfFN|AJN?JAJEn@Q~@WLAFAL@NBfBb@pDz@pA\\|A^~DlA~DdAxDhAjEhA"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 15,
+              "name": "Capitol Station (SB)",
+              "stopId": "1:2738",
+              "stopCode": "2738",
+              "lon": -97.744169,
+              "lat": 30.275022,
+              "arrival": 1514990340000,
+              "departure": 1514990340000,
+              "stopIndex": 14
+            },
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 13,
+              "name": "UT West Mall Station (SB)",
+              "stopId": "1:497",
+              "stopCode": "497",
+              "lon": -97.741815,
+              "lat": 30.286064,
+              "arrival": 1514990039000,
+              "departure": 1514990040000,
+              "stopIndex": 12
+            },
+            "serviceDate": "20180103",
+            "tripId": "1:1835037",
+            "agencyId": "1",
+            "headsign": "803 WESTGATE",
+            "tripBlockId": "574324",
+            "interlineWithPreviousLeg": false,
+            "mode": "BUS",
+            "pathway": false,
+            "distance": 1255.658146115137,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514990340000,
+            "startTime": 1514990040000,
+            "route": "803",
+            "agencyName": "Capital Metro",
+            "agencyUrl": "http://www.capmetro.org/",
+            "agencyTimeZoneOffset": -21600000,
+            "routeColor": "555555",
+            "routeType": 3,
+            "routeId": "1:803",
+            "routeTextColor": "FFFFFF"
+          },
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 30.27499574106882,
+                "distance": 11.089,
+                "relativeDirection": "DEPART",
+                "streetName": "Guadalupe Street",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.74407444766344
+              },
+              {
+                "elevation": [],
+                "lat": 30.2749008,
+                "distance": 743.8219999999999,
+                "relativeDirection": "RIGHT",
+                "streetName": "West 12th Street",
+                "absoluteDirection": "WEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.7441098
+              }
+            ],
+            "duration": 570,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 754.9109999999998,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514990910000,
+            "startTime": 1514990340000,
+            "route": "",
+            "agencyTimeZoneOffset": -21600000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 15,
+              "name": "Capitol Station (SB)",
+              "stopId": "1:2738",
+              "stopCode": "2738",
+              "lon": -97.744169,
+              "lat": 30.275022,
+              "arrival": 1514990340000,
+              "departure": 1514990340000,
+              "stopIndex": 14
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 19,
+              "name": "1200 Lamar/12th",
+              "stopId": "1:4090",
+              "stopCode": "4090",
+              "lon": -97.751452,
+              "lat": 30.276963,
+              "arrival": 1514990910000,
+              "departure": 1514990983000,
+              "stopIndex": 18
+            },
+            "legGeometry": {
+              "length": 16,
+              "points": "uaxwDnsqsQPDy@tE}@xE{@rEQz@c@~BB`@[nBm@tDERQ~@YtACHc@vBEN"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          },
+          {
+            "steps": [],
+            "duration": 27,
+            "transitLeg": true,
+            "rentedBike": false,
+            "routeLongName": "Lamar/45th",
+            "routeShortName": "338",
+            "legGeometry": {
+              "length": 4,
+              "points": "ymxwDdassQDBzDtApDrA"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 20,
+              "name": "1000 Lamar/10th",
+              "stopId": "1:4088",
+              "stopCode": "4088",
+              "lon": -97.752332,
+              "lat": 30.275103,
+              "arrival": 1514991010000,
+              "departure": 1514991011000,
+              "stopIndex": 19
+            },
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 19,
+              "name": "1200 Lamar/12th",
+              "stopId": "1:4090",
+              "stopCode": "4090",
+              "lon": -97.751452,
+              "lat": 30.276963,
+              "arrival": 1514990910000,
+              "departure": 1514990983000,
+              "stopIndex": 18
+            },
+            "serviceDate": "20180103",
+            "tripId": "1:1827382",
+            "agencyId": "1",
+            "headsign": "338-Lamar/45th-SB",
+            "tripBlockId": "573516",
+            "interlineWithPreviousLeg": false,
+            "mode": "BUS",
+            "pathway": false,
+            "distance": 223.42081905647848,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514991010000,
+            "startTime": 1514990983000,
+            "route": "338",
+            "agencyName": "Capital Metro",
+            "agencyUrl": "http://www.capmetro.org/",
+            "agencyTimeZoneOffset": -21600000,
+            "routeColor": "004A97",
+            "routeType": 3,
+            "routeId": "1:338",
+            "routeTextColor": "FFFFFF"
+          },
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 30.275075213887146,
+                "distance": 134.81199999999998,
+                "relativeDirection": "DEPART",
+                "streetName": "North Lamar Boulevard",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.75225313211409
+              },
+              {
+                "elevation": [],
+                "lat": 30.273949,
+                "distance": 104.46,
+                "relativeDirection": "LEFT",
+                "streetName": "West 9th Street",
+                "absoluteDirection": "EAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.752773
+              },
+              {
+                "elevation": [],
+                "lat": 30.273622800000002,
+                "distance": 107.101,
+                "relativeDirection": "RIGHT",
+                "streetName": "Henderson Street",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.7517529
+              }
+            ],
+            "duration": 274,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 346.373,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514991285000,
+            "startTime": 1514991011000,
+            "route": "",
+            "agencyTimeZoneOffset": -21600000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 20,
+              "name": "1000 Lamar/10th",
+              "stopId": "1:4088",
+              "stopCode": "4088",
+              "lon": -97.752332,
+              "lat": 30.275103,
+              "arrival": 1514991010000,
+              "departure": 1514991011000,
+              "stopIndex": 19
+            },
+            "to": {
+              "vertexType": "NORMAL",
+              "orig": "",
+              "arrival": 1514991285000,
+              "lat": 30.2727757,
+              "lon": -97.7522587,
+              "name": "Destination"
+            },
+            "legGeometry": {
+              "length": 12,
+              "points": "ebxwDrfssQLD|@\\|Ah@v@X~@kERA^NB@JD`Bn@JF"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          }
+        ],
+        "fare": {
+          "details": {
+            "regular": [
+              {
+                "routes": [
+                  "1:803"
+                ],
+                "price": {
+                  "cents": 125,
+                  "currency": {
+                    "currencyCode": "USD",
+                    "defaultFractionDigits": 2,
+                    "currency": "USD",
+                    "symbol": "$"
+                  }
+                },
+                "fareId": "1:a"
+              },
+              {
+                "routes": [
+                  "1:338"
+                ],
+                "price": {
+                  "cents": 125,
+                  "currency": {
+                    "currencyCode": "USD",
+                    "defaultFractionDigits": 2,
+                    "currency": "USD",
+                    "symbol": "$"
+                  }
+                },
+                "fareId": "1:a"
+              }
+            ]
+          },
+          "fare": {
+            "regular": {
+              "cents": 250,
+              "currency": {
+                "currencyCode": "USD",
+                "defaultFractionDigits": 2,
+                "currency": "USD",
+                "symbol": "$"
+              }
+            }
+          }
+        },
+        "transfers": 1,
+        "elevationGained": 0,
+        "elevationLost": 0,
+        "duration": 1466,
+        "startTime": 1514989819000,
+        "endTime": 1514991285000,
+        "walkTime": 1064,
+        "transitTime": 327,
+        "waitingTime": 75,
+        "walkDistance": 1292.7215112570761,
+        "walkLimitExceeded": false
+      },
+      {
+        "tooSloped": false,
+        "legs": [
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 30.285974925613107,
+                "distance": 6.733,
+                "relativeDirection": "DEPART",
+                "streetName": "path",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.74042452903532
+              },
+              {
+                "elevation": [],
+                "lat": 30.285914400000003,
+                "distance": 164.65500000000003,
+                "relativeDirection": "RIGHT",
+                "streetName": "West Mall",
+                "absoluteDirection": "WEST",
+                "stayOn": false,
+                "area": true,
+                "bogusName": false,
+                "lon": -97.7404266
+              },
+              {
+                "elevation": [],
+                "lat": 30.285884300000003,
+                "distance": 19.395,
+                "relativeDirection": "RIGHT",
+                "streetName": "Guadalupe Street",
+                "absoluteDirection": "NORTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.74172890000001
+              }
+            ],
+            "duration": 220,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 190.78300000000004,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514990519000,
+            "startTime": 1514990299000,
+            "route": "",
+            "agencyTimeZoneOffset": -21600000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "NORMAL",
+              "orig": "",
+              "departure": 1514990299000,
+              "lat": 30.2859758,
+              "lon": -97.7404588,
+              "name": "Origin"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 11,
+              "name": "UT West Mall Station (SB)",
+              "stopId": "1:497",
+              "stopCode": "497",
+              "lon": -97.741815,
+              "lat": 30.286064,
+              "arrival": 1514990519000,
+              "departure": 1514990520000,
+              "stopIndex": 10
+            },
+            "legGeometry": {
+              "length": 21,
+              "points": "ifzwDt|psQJ?Cx@I?ATEdAD??BB@ARC??@GAANEA?XR@NRD@ARa@A"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          },
+          {
+            "steps": [],
+            "duration": 480,
+            "transitLeg": true,
+            "rentedBike": false,
+            "routeLongName": "N Lamar S Congress",
+            "routeShortName": "801",
+            "legGeometry": {
+              "length": 33,
+              "points": "yfzwDxdqsQ^BpDLnFRfFN|AJN?JAJEn@Q~@WLAFAL@NBfBb@pDz@pA\\|A^~DlA~DdAxDhAjEhAZHdFxAxD|@|DdA~Cz@\\HtDdAzD~@xDjAhAX"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 15,
+              "name": "Republic Square Station (SB)",
+              "stopId": "1:5867",
+              "stopCode": "5867",
+              "lon": -97.746857,
+              "lat": 30.267751,
+              "arrival": 1.514991e+12,
+              "departure": 1.514991e+12,
+              "stopIndex": 14
+            },
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 11,
+              "name": "UT West Mall Station (SB)",
+              "stopId": "1:497",
+              "stopCode": "497",
+              "lon": -97.741815,
+              "lat": 30.286064,
+              "arrival": 1514990519000,
+              "departure": 1514990520000,
+              "stopIndex": 10
+            },
+            "serviceDate": "20180103",
+            "tripId": "1:1834377",
+            "agencyId": "1",
+            "headsign": "801 SOUTH PARK",
+            "tripBlockId": "574240",
+            "interlineWithPreviousLeg": false,
+            "mode": "BUS",
+            "pathway": false,
+            "distance": 2104.3750126033765,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1.514991e+12,
+            "startTime": 1514990520000,
+            "route": "801",
+            "agencyName": "Capital Metro",
+            "agencyUrl": "http://www.capmetro.org/",
+            "agencyTimeZoneOffset": -21600000,
+            "routeColor": "555555",
+            "routeType": 3,
+            "routeId": "1:801",
+            "routeTextColor": "FFFFFF"
+          },
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 30.267752501370953,
+                "distance": 151.635,
+                "relativeDirection": "DEPART",
+                "streetName": "sidewalk",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": true,
+                "lon": -97.74686222705832
+              }
+            ],
+            "duration": 117,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 151.635,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514991117000,
+            "startTime": 1.514991e+12,
+            "route": "",
+            "agencyTimeZoneOffset": -21600000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 15,
+              "name": "Republic Square Station (SB)",
+              "stopId": "1:5867",
+              "stopCode": "5867",
+              "lon": -97.746857,
+              "lat": 30.267751,
+              "arrival": 1.514991e+12,
+              "departure": 1.514991e+12,
+              "stopIndex": 14
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 10,
+              "name": "419 4th/San Antonio",
+              "stopId": "1:5998",
+              "stopCode": "5998",
+              "lon": -97.748007,
+              "lat": 30.267505,
+              "arrival": 1514991117000,
+              "departure": 1514991660000,
+              "stopIndex": 9
+            },
+            "legGeometry": {
+              "length": 6,
+              "points": "mtvwD|drsQtA^HBYzAKj@Mt@"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          },
+          {
+            "steps": [],
+            "duration": 130,
+            "transitLeg": true,
+            "rentedBike": false,
+            "routeLongName": "Exposition",
+            "routeShortName": "21",
+            "legGeometry": {
+              "length": 12,
+              "points": "urvwDblrsQAH{@vEsDgA}DeAw@dEGT_A`EEPs@pCa@rBYfA"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 13,
+              "name": "842 6th/Wood",
+              "stopId": "1:1970",
+              "stopCode": "1970",
+              "lon": -97.752215,
+              "lat": 30.270962,
+              "arrival": 1514991790000,
+              "departure": 1514991791000,
+              "stopIndex": 12
+            },
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 10,
+              "name": "419 4th/San Antonio",
+              "stopId": "1:5998",
+              "stopCode": "5998",
+              "lon": -97.748007,
+              "lat": 30.267505,
+              "arrival": 1514991117000,
+              "departure": 1514991660000,
+              "stopIndex": 9
+            },
+            "serviceDate": "20180103",
+            "tripId": "1:1824025",
+            "agencyId": "1",
+            "headsign": "21-Exposition",
+            "tripBlockId": "573379",
+            "interlineWithPreviousLeg": false,
+            "mode": "BUS",
+            "pathway": false,
+            "distance": 600.5333109968418,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514991790000,
+            "startTime": 1514991660000,
+            "route": "21",
+            "agencyName": "Capital Metro",
+            "agencyUrl": "http://www.capmetro.org/",
+            "agencyTimeZoneOffset": -21600000,
+            "routeColor": "004A97",
+            "routeType": 3,
+            "routeId": "1:21",
+            "routeTextColor": "FFFFFF"
+          },
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 30.27087093807517,
+                "distance": 71.48,
+                "relativeDirection": "DEPART",
+                "streetName": "West 6th Street",
+                "absoluteDirection": "NORTHWEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.75226133789324
+              },
+              {
+                "elevation": [],
+                "lat": 30.271129300000002,
+                "distance": 194.113,
+                "relativeDirection": "RIGHT",
+                "streetName": "Henderson Street",
+                "absoluteDirection": "NORTHEAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.75294290000001
+              }
+            ],
+            "duration": 205,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 265.593,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514991996000,
+            "startTime": 1514991791000,
+            "route": "",
+            "agencyTimeZoneOffset": -21600000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 13,
+              "name": "842 6th/Wood",
+              "stopId": "1:1970",
+              "stopCode": "1970",
+              "lon": -97.752215,
+              "lat": 30.270962,
+              "arrival": 1514991790000,
+              "departure": 1514991791000,
+              "stopIndex": 12
+            },
+            "to": {
+              "vertexType": "NORMAL",
+              "orig": "",
+              "arrival": 1514991996000,
+              "lat": 30.2727757,
+              "lon": -97.7522587,
+              "name": "Destination"
+            },
+            "legGeometry": {
+              "length": 5,
+              "points": "}gwwDtfssQMb@CL_@tAaI_D"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          }
+        ],
+        "fare": {
+          "details": {
+            "regular": [
+              {
+                "routes": [
+                  "1:801"
+                ],
+                "price": {
+                  "cents": 125,
+                  "currency": {
+                    "currencyCode": "USD",
+                    "defaultFractionDigits": 2,
+                    "currency": "USD",
+                    "symbol": "$"
+                  }
+                },
+                "fareId": "1:a"
+              },
+              {
+                "routes": [
+                  "1:21"
+                ],
+                "price": {
+                  "cents": 125,
+                  "currency": {
+                    "currencyCode": "USD",
+                    "defaultFractionDigits": 2,
+                    "currency": "USD",
+                    "symbol": "$"
+                  }
+                },
+                "fareId": "1:a"
+              }
+            ]
+          },
+          "fare": {
+            "regular": {
+              "cents": 250,
+              "currency": {
+                "currencyCode": "USD",
+                "defaultFractionDigits": 2,
+                "currency": "USD",
+                "symbol": "$"
+              }
+            }
+          }
+        },
+        "transfers": 1,
+        "elevationGained": 0,
+        "elevationLost": 0,
+        "duration": 1697,
+        "startTime": 1514990299000,
+        "endTime": 1514991996000,
+        "walkTime": 542,
+        "transitTime": 610,
+        "waitingTime": 545,
+        "walkDistance": 608.6196465969022,
+        "walkLimitExceeded": false
+      },
+      {
+        "tooSloped": false,
+        "legs": [
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 30.285974925613107,
+                "distance": 6.733,
+                "relativeDirection": "DEPART",
+                "streetName": "path",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.74042452903532
+              },
+              {
+                "elevation": [],
+                "lat": 30.285914400000003,
+                "distance": 51.123,
+                "relativeDirection": "LEFT",
+                "streetName": "West Mall",
+                "absoluteDirection": "EAST",
+                "stayOn": false,
+                "area": true,
+                "bogusName": false,
+                "lon": -97.7404266
+              },
+              {
+                "elevation": [],
+                "lat": 30.2858778,
+                "distance": 39.075,
+                "relativeDirection": "RIGHT",
+                "streetName": "West Mall",
+                "absoluteDirection": "SOUTH",
+                "stayOn": true,
+                "area": true,
+                "bogusName": false,
+                "lon": -97.7399462
+              },
+              {
+                "elevation": [],
+                "lat": 30.285623200000003,
+                "distance": 39.588,
+                "relativeDirection": "LEFT",
+                "streetName": "path",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": true,
+                "lon": -97.74007200000001
+              },
+              {
+                "elevation": [],
+                "lat": 30.285268400000003,
+                "distance": 26.367,
+                "relativeDirection": "CONTINUE",
+                "streetName": "Main Mall",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": true,
+                "bogusName": false,
+                "lon": -97.7401062
+              },
+              {
+                "elevation": [],
+                "lat": 30.285032100000002,
+                "distance": 27.675,
+                "relativeDirection": "RIGHT",
+                "streetName": "Inner Campus Drive",
+                "absoluteDirection": "WEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.7401291
+              },
+              {
+                "elevation": [],
+                "lat": 30.285070800000003,
+                "distance": 152.91400000000002,
+                "relativeDirection": "LEFT",
+                "streetName": "path",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": true,
+                "lon": -97.7404128
+              },
+              {
+                "elevation": [],
+                "lat": 30.2837007,
+                "distance": 56.277,
+                "relativeDirection": "RIGHT",
+                "streetName": "West 21st Street",
+                "absoluteDirection": "WEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.74054980000001
+              }
+            ],
+            "duration": 357,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 399.752,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514991179000,
+            "startTime": 1514990822000,
+            "route": "",
+            "agencyTimeZoneOffset": -21600000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "NORMAL",
+              "orig": "",
+              "departure": 1514990822000,
+              "lat": 30.2859758,
+              "lon": -97.7404588,
+              "name": "Origin"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 25,
+              "name": "21st/Whitis (Midblock)",
+              "stopId": "1:2780",
+              "stopCode": "2780",
+              "lon": -97.741124,
+              "lat": 30.283844,
+              "arrival": 1514991179000,
+              "departure": 1514991180000,
+              "stopIndex": 24
+            },
+            "legGeometry": {
+              "length": 25,
+              "points": "ifzwDt|psQJ??GD@?QC??EBg@@YX@XBARJ?z@Dl@BA`@CNAF~ETT@Z@An@AVAVAT"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          },
+          {
+            "steps": [],
+            "duration": 342,
+            "transitLeg": true,
+            "rentedBike": false,
+            "routeLongName": "Martin Luther King",
+            "routeShortName": "18",
+            "legGeometry": {
+              "length": 39,
+              "points": "oxywD`aqsQG|CtADpCH|AJN?JAJEn@Q~@WLAFAL@NBfBb@pDz@bDx@JB~DlA~DdAxDhAjEhAZHQRo@hDDXOHs@rDBVMLo@nDBXOLId@c@dC@ZeAfHa@jBSz@"
+            },
+            "to": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 30,
+              "name": "915 12th/Lamar",
+              "stopId": "1:5756",
+              "stopCode": "5756",
+              "lon": -97.750729,
+              "lat": 30.276753,
+              "arrival": 1514991522000,
+              "departure": 1514991523000,
+              "stopIndex": 29
+            },
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 25,
+              "name": "21st/Whitis (Midblock)",
+              "stopId": "1:2780",
+              "stopCode": "2780",
+              "lon": -97.741124,
+              "lat": 30.283844,
+              "arrival": 1514991179000,
+              "departure": 1514991180000,
+              "stopIndex": 24
+            },
+            "serviceDate": "20180103",
+            "tripId": "1:1822972",
+            "agencyId": "1",
+            "headsign": "18-Martin Luther King-WB",
+            "tripBlockId": "573309",
+            "interlineWithPreviousLeg": false,
+            "mode": "BUS",
+            "pathway": false,
+            "distance": 1719.2756942403062,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514991522000,
+            "startTime": 1514991180000,
+            "route": "18",
+            "agencyName": "Capital Metro",
+            "agencyUrl": "http://www.capmetro.org/",
+            "agencyTimeZoneOffset": -21600000,
+            "routeColor": "004A97",
+            "routeType": 3,
+            "routeId": "1:18",
+            "routeTextColor": "FFFFFF"
+          },
+          {
+            "steps": [
+              {
+                "elevation": [],
+                "lat": 30.276679430395493,
+                "distance": 65.71000000000001,
+                "relativeDirection": "DEPART",
+                "streetName": "West 12th Street",
+                "absoluteDirection": "WEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.75075881083382
+              },
+              {
+                "elevation": [],
+                "lat": 30.276874600000003,
+                "distance": 350.84999999999997,
+                "relativeDirection": "LEFT",
+                "streetName": "North Lamar Boulevard",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.75140470000001
+              },
+              {
+                "elevation": [],
+                "lat": 30.273949,
+                "distance": 104.46,
+                "relativeDirection": "LEFT",
+                "streetName": "West 9th Street",
+                "absoluteDirection": "EAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.752773
+              },
+              {
+                "elevation": [],
+                "lat": 30.273622800000002,
+                "distance": 107.101,
+                "relativeDirection": "RIGHT",
+                "streetName": "Henderson Street",
+                "absoluteDirection": "SOUTH",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": -97.7517529
+              }
+            ],
+            "duration": 494,
+            "mode": "WALK",
+            "pathway": false,
+            "distance": 628.121,
+            "realTime": false,
+            "arrivalDelay": 0,
+            "departureDelay": 0,
+            "endTime": 1514992017000,
+            "startTime": 1514991523000,
+            "route": "",
+            "agencyTimeZoneOffset": -21600000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "vertexType": "TRANSIT",
+              "stopSequence": 30,
+              "name": "915 12th/Lamar",
+              "stopId": "1:5756",
+              "stopCode": "5756",
+              "lon": -97.750729,
+              "lat": 30.276753,
+              "arrival": 1514991522000,
+              "departure": 1514991523000,
+              "stopIndex": 29
+            },
+            "to": {
+              "vertexType": "NORMAL",
+              "orig": "",
+              "arrival": 1514992017000,
+              "lat": 30.2727757,
+              "lon": -97.7522587,
+              "name": "Destination"
+            },
+            "legGeometry": {
+              "length": 20,
+              "points": "elxwDf}rsQCHc@vBRFh@RzBx@zBz@DBj@RLD|@\\|Ah@v@X~@kERA^NB@JD`Bn@JF"
+            },
+            "rentedBike": false,
+            "transitLeg": false
+          }
+        ],
+        "fare": {
+          "details": {
+            "regular": [
+              {
+                "routes": [
+                  "1:18"
+                ],
+                "price": {
+                  "cents": 125,
+                  "currency": {
+                    "currencyCode": "USD",
+                    "defaultFractionDigits": 2,
+                    "currency": "USD",
+                    "symbol": "$"
+                  }
+                },
+                "fareId": "1:a"
+              }
+            ]
+          },
+          "fare": {
+            "regular": {
+              "cents": 125,
+              "currency": {
+                "currencyCode": "USD",
+                "defaultFractionDigits": 2,
+                "currency": "USD",
+                "symbol": "$"
+              }
+            }
+          }
+        },
+        "transfers": 0,
+        "elevationGained": 0,
+        "elevationLost": 0,
+        "duration": 1195,
+        "startTime": 1514990822000,
+        "endTime": 1514992017000,
+        "walkTime": 851,
+        "transitTime": 342,
+        "waitingTime": 2,
+        "walkDistance": 1028.360218029392,
+        "walkLimitExceeded": false
+      }
+    ],
+    "to": {
+      "vertexType": "NORMAL",
+      "orig": "",
+      "lat": 30.2727757,
+      "lon": -97.7522587,
+      "name": "Destination"
+    },
+    "from": {
+      "vertexType": "NORMAL",
+      "orig": "",
+      "lat": 30.2859758,
+      "lon": -97.7404588,
+      "name": "Origin"
+    },
+    "date": 1514989800000
+  },
+  "requestParameters": {
+    "locale": "en",
+    "date": "1-3-2018",
+    "mode": "TRANSIT,WALK",
+    "wheelchair": "false",
+    "arriveBy": "false",
+    "fromPlace": "30.2859758,-97.7404588",
+    "toPlace": "30.2727757,-97.7522587",
+    "maxWalkDistance": "804.672",
+    "time": "8:30am"
+  }
+}
+200

@@ -1,16 +1,58 @@
-import requests
+import pytz
+from datetime import datetime
 
-def query_parade():
-    url = 'http://TUCParadeELB-1716058470.us-west-2.elb.amazonaws.com/sp'
-    # url = 'http://54.218.80.167:8103/sp'
-    params = {
-        "start_lat": 32.07845,
-        "start_lon": -110.62901,
-        "end_lat": 32.53766,
-        "end_lon": -110.94301,
-        "departure_time": "12:45",
-        "toll": "true"
-    }
-    r = requests.post(url, json=params)
-    print(r.text)
-    print(r.status_code)
+from timezonefinder import TimezoneFinder
+import secrets
+
+
+def unique_place_id():
+    place_id = 1
+    while True:
+        yield place_id
+        place_id += 1
+
+
+def gps2timezone(lat, lon):
+    tf = TimezoneFinder()
+    tz = tf.timezone_at(lng=lon, lat=lat)
+    return tz
+
+
+def otp_date_time(now_pst, time):
+    fields = time.split(':')
+    hour = int(fields[0])
+    minute = int(fields[1])
+
+    suffix = 'am'
+    if hour > 12:
+        hour -= 12
+        suffix = 'pm'
+    elif hour == 12:
+        suffix = 'pm'
+
+    otp_time = '{}:{}{}'.format(hour, str(minute).zfill(2), suffix)
+    otp_date = now_pst.strftime('%m-%d-%y')
+
+    return otp_date, otp_time
+
+
+def minutes2slot_id(minutes):
+    """
+    Convert time of day in total # of minutes to one of 96 time slot ID
+
+    :param minutes: time of day in total # of minutes
+    :return: slot id within [1, 96]
+    """
+    if minutes >= 1440:  # 24 * 60 = 1440
+        minutes -= 1440
+    return minutes // 15 + 1
+
+
+if __name__ == '__main__':
+    print(gps2timezone(39.75907, -104.99724))  # denver: America/Denver
+    print(gps2timezone(30.2859758, -97.7404588))  # autsin: America/Chicago
+    print(gps2timezone(29.7180255, -95.4002109))  # houston: America/Chicago
+    print(gps2timezone(31.76000, -106.49157))  # elpaso: America/Denver
+    print(gps2timezone(32.2315175, -110.9565735))  # tucson: America/Phoenix
+
+    print(otp_date_time('15:30'))
