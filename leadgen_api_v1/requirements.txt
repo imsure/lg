@@ -5,3 +5,4 @@ timezonefinder==2.1.2
 coreapi==2.3.3
 pygments==2.2.0
 markdown==2.6.11
+celery==4.1.0
