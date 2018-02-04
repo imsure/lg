@@ -41,11 +41,9 @@ class TravelOption(models.Model):
     """
     # Django creates BTree index on foreignkey field by default
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
-    day_of_week = models.CharField('Activity occurs in which day',
-                                   max_length=2, choices=DAY_OF_WEEK_CHOICES)
+    day_of_week = models.CharField(max_length=2, choices=DAY_OF_WEEK_CHOICES)
     # Range: 1 to 96 for each time slot; other values are invalid
     slot_id = models.PositiveSmallIntegerField(
-        'ID of time slot this option corresponds to',
         validators=[MinValueValidator(1), MaxValueValidator(96)]
     )
     tz = models.CharField('Time Zone', max_length=2, choices=TZ_CHOICES)
