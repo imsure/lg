@@ -101,3 +101,5 @@ config.py
 migrations
 
 celerybeat-schedule
+my.conf
+settings_production.py
