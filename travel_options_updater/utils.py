@@ -2,7 +2,10 @@ import pytz
 from datetime import datetime
 
 from timezonefinder import TimezoneFinder
+import requests
+
 import secrets
+import constants as const
 
 
 def unique_place_id():
@@ -46,6 +49,37 @@ def minutes2slot_id(minutes):
     if minutes >= 1440:  # 24 * 60 = 1440
         minutes -= 1440
     return minutes // 15 + 1
+
+
+def otp_walk_bike_time(from_lat, from_lon, to_lat, to_lon, tz):
+    router = const.TIMEZONE2OTP_ROUTER[tz]
+    url = "{}/otp/routers/{}/plan".format(secrets.OTP_URL, router)
+
+    params = {
+        'fromPlace': '{},{}'.format(from_lat, from_lon),
+        'toPlace': '{},{}'.format(to_lat, to_lon),
+        'mode': 'WALK',
+        'arriveBy': 'false',
+        'wheelchair': 'false',
+        'locale': 'en',
+    }
+
+    r = requests.get(url, params=params)
+    decoded = r.json()
+    walk_time = None
+    if r.ok and 'plan' in decoded and 'itineraries' in decoded['plan']:
+        iti = decoded['plan']['itineraries'][0]
+        walk_time = iti['duration']
+
+    params['mode'] = 'BICYCLE'
+    r = requests.get(url, params=params)
+    decoded = r.json()
+    bike_time = None
+    if r.ok and 'plan' in decoded and 'itineraries' in decoded['plan']:
+        iti = decoded['plan']['itineraries'][0]
+        bike_time = iti['duration']
+
+    return walk_time, bike_time
 
 
 if __name__ == '__main__':
