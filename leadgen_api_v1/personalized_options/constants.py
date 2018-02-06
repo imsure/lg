@@ -76,9 +76,3 @@ TZ_MAP = {
     'America/Chicago': America_Chicago,
     'America/Denver': America_Denver,
 }
-
-TZ_OTP_ROUTER_MAP = {
-    America_Phoenix: 'tucson',
-    America_Chicago: 'austin',
-    America_Denver: 'elpaso',
-}

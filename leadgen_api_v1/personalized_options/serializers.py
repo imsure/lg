@@ -2,7 +2,6 @@ from django.core.exceptions import ValidationError
 
 from .models import Activity, TravelOption
 from . import constants as const
-from . import utils
 
 from rest_framework import serializers
 
