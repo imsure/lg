@@ -1,6 +1,3 @@
-import pytz
-from datetime import datetime
-
 from timezonefinder import TimezoneFinder
 import requests
 
