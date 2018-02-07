@@ -27,10 +27,12 @@ class Activity(models.Model):
 
     class Meta:
         indexes = [
-            # To make table join with TravelOption on id fast
-            models.Index(fields=['id'], name='activity_id_idx'),
+            # Note: no need to do this, primary key is MySql is always indexed by default.
+            # see: https://dev.mysql.com/doc/refman/5.7/en/innodb-index-types.html
+            # models.Index(fields=['id'], name='activity_id_idx'),
             # To make "SELECT * from Activity where from_id=x and to_id=y" fast
-            models.Index(fields=['from_id', 'to_id'], name='from_to_idx'),
+            # Note: mysql automatically add indexes on columns with unique constraint
+            # models.Index(fields=['from_id', 'to_id'], name='from_to_idx'),
         ]
         unique_together = ['from_id', 'to_id']
 
