@@ -79,15 +79,8 @@ class ActivitySerializer(serializers.ModelSerializer):
 
         from_lon = self.validated_data['from_lon']
         from_lat = self.validated_data['from_lat']
-        # to_lon = self.validated_data['to_lon']
-        # to_lat = self.validated_data['to_lat']
         tz = Timezone_Finder.timezone_at(lng=from_lon, lat=from_lat)
         tz = const.TZ_MAP[tz]
-
-        # TODO: better run this asynchronously
-        # walk_time, bike_time = utils.otp_walk_bike_time(from_lat, from_lon, to_lat, to_lon, tz)
-        # self.validated_data['walk_time'] = walk_time
-        # self.validated_data['bike_time'] = bike_time
 
         super().save(**kwargs)
 
@@ -103,6 +96,9 @@ class ActivitySerializer(serializers.ModelSerializer):
 
 
 class TravelOptionRetrieveSerializer(serializers.ModelSerializer):
+    """
+    We use this serializer to retrieve travel options for update purpose.
+    """
 
     class Meta:
         model = TravelOption
@@ -212,6 +208,10 @@ def validate_uber_option(uber):
 
 
 class TravelOptionUpdateSerializer(serializers.ModelSerializer):
+    """
+    We use this serializer to write calculated travel options back to database.
+    """
+
     drive = serializers.JSONField(validators=[validate_drive_option])
     transit = serializers.JSONField(validators=[validate_transit_option])
     uber = serializers.JSONField(validators=[validate_uber_option])

@@ -17,7 +17,6 @@ class Activity(models.Model):
     from_lon = models.FloatField('Start longitude')
     to_lat = models.FloatField('End latitude')
     to_lon = models.FloatField('End longitude')
-    # patterns = models.TextField('Activity patterns in JSON format')
     walk_time = models.PositiveSmallIntegerField(blank=True, null=True)
     bike_time = models.PositiveSmallIntegerField(blank=True, null=True)
 
@@ -56,5 +55,6 @@ class TravelOption(models.Model):
     class Meta:
         unique_together = ['activity', 'day_of_week', 'slot_id']
         indexes = [
+            # For fast retrieval of travel options given a combination of day_of_week, slot_id and timezone.
             models.Index(fields=['day_of_week', 'slot_id', 'tz'], name='day_of_week_slot_tz_idx')
         ]
