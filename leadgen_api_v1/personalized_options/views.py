@@ -55,6 +55,11 @@ def create_update_activity(request, from_id, to_id):
             status=status.HTTP_400_BAD_REQUEST
         )
 
+    if 'patterns' not in request.data:
+        return Response(
+            {'Error': 'patterns is required!'}, status=status.HTTP_400_BAD_REQUEST
+        )
+
     request.data['from_id'] = from_id
     request.data['to_id'] = to_id
 

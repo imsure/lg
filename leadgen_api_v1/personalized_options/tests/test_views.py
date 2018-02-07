@@ -367,6 +367,27 @@ class ActivityViewTest(APITestCase):
         options = TravelOption.objects.all()
         self.assertEqual(len(options), 8)  # total 8 travel options for these 3 activites
 
+    def test_create_activity_missing_pattern_field(self):
+        """
+        An activity without a pattern field should be denied.
+        """
+        from_id = next(place_id_iter)
+        to_id = next(place_id_iter)
+        activity = {
+            'from_lat': fixture.from_lat_tucson,
+            'from_lon': fixture.from_lon_tucson,
+            'to_lat': fixture.to_lat_tucson,
+            'to_lon': fixture.to_lon_tucson,
+            'purpose': const.WORK,
+        }
+
+        client = APIClient()
+        client.force_authenticate(user=self.user)
+        r = client.put(reverse('create_update_activity', kwargs={'from_id': from_id, 'to_id': to_id}),
+                       activity, format='json')
+        self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertRegex(r.content.decode('utf-8'), "patterns is required")
+
     def test_create_activity_invalid_purpose(self):
         """
         An activity with an invalid purpose should not be accepted.

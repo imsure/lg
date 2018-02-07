@@ -75,7 +75,7 @@ class ActivitySerializer(serializers.ModelSerializer):
     patterns = serializers.JSONField(validators=[validate_patterns], required=False)
 
     def save(self, **kwargs):
-        pat = self.validated_data.pop('patterns')
+        pat = self.validated_data.pop('patterns', {})
 
         from_lon = self.validated_data['from_lon']
         from_lat = self.validated_data['from_lat']
