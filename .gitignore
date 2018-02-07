@@ -104,3 +104,5 @@ celerybeat-schedule
 my.conf
 settings_production.py
 leadgen-nginx.conf
+
+client/
