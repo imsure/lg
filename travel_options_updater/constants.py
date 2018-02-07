@@ -4,7 +4,7 @@ MAX_WALK_DISTANCE = 1609.34  # unit: meter, equals to 1 mile
 SUNTRAN_FARE = 1.75  # one-way full fare in USD
 
 WEEKDAY = 'WD'
-WEEKEND = 'WE'
+WEEKEND = 'WN'
 MONDAY = 'MO'
 TUESDAY = 'TU'
 WEDNESDAY = 'WE'
