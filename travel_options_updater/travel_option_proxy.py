@@ -6,6 +6,10 @@ import constants as const
 
 
 class TravelOptionProxy(object):
+    """
+    Serves as a proxy for the `updater` to get travel options from multiple sources (Parade,
+    OTP and Uber).
+    """
 
     def __init__(self, from_lat, from_lon, to_lat, to_lon, timezone, date, time):
         self.from_lat = from_lat

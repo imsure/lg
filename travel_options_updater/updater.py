@@ -1,3 +1,7 @@
+"""
+Celery periodic tasks for updating travel options.
+"""
+
 import pytz
 from datetime import datetime
 import requests

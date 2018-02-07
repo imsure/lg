@@ -1,3 +1,7 @@
+"""
+Test fixtures
+"""
+
 # Default GPS points used for testing.
 from_lat_tucson = 32.27908
 from_lon_tucson = -110.94449
