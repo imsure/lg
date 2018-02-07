@@ -491,7 +491,7 @@ class ActivityViewTest(APITestCase):
         self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertRegex(r.content.decode('utf-8'), 'Probability value must be in between 0 and 100')
 
-    def test_create_activity_from_id_to_id_unique_together(self):
+    def test_create_activity_same_from_id_to_id(self):
         """
         An activity with the same from_id and to_id should not be accepted.
         """
