@@ -6,6 +6,7 @@ from rest_framework import permissions
 from .serializers import ActivitySerializer
 from .serializers import TravelOptionRetrieveSerializer, TravelOptionUpdateSerializer
 from .models import Activity, TravelOption
+from .constants import DAY_OF_WEEK_CHOICES
 
 
 @api_view(['GET'])
@@ -145,7 +146,19 @@ def personalized_options(request, from_id, to_id, day_of_week, slot_id):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-    option = TravelOption.objects.get(activity_id=activity.id, day_of_week=day_of_week, slot_id=slot_id)
+    try:
+        option = TravelOption.objects.get(activity_id=activity.id, day_of_week=day_of_week, slot_id=slot_id)
+    except TravelOption.DoesNotExist:
+        day_of_week_display = None
+        for choice in DAY_OF_WEEK_CHOICES:
+            if day_of_week == choice[0]:
+                day_of_week_display = choice[1]
+                break
+        return Response(
+            {'Error': 'The activity from location {} to location {} does not occur '
+                      'on {} at slot {}'.format(from_id, to_id, day_of_week_display, slot_id)},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
     response = {
         'drive': {},

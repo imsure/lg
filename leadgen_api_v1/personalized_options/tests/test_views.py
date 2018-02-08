@@ -992,6 +992,27 @@ class ActivityViewTest(APITestCase):
         self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertRegex(r.content.decode('utf-8'), 'does not exist')
 
+    def test_get_personalized_options_entry_not_exist(self):
+        """
+        An request to get personalized option of an activity without a travel option entry
+        identified by day_of_week and slot_id should be denied and informed.
+        """
+        from_id = next(place_id_iter)
+        to_id = next(place_id_iter)
+        activity = activity_tucson()
+
+        client = APIClient()
+        client.force_authenticate(user=self.user)
+        r = client.put(reverse('create_update_activity', kwargs={'from_id': from_id, 'to_id': to_id}),
+                       activity, format='json')
+        self.assertEqual(r.status_code, status.HTTP_201_CREATED)
+
+        r = client.get(reverse('personalized_options', kwargs={'day_of_week': const.WEEKDAY,
+                                                               'from_id': from_id, 'to_id': to_id,
+                                                               'slot_id': 4}))
+        self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertRegex(r.content.decode('utf-8'), 'does not occur on')
+
     def test_get_personalized_options_zero_option(self):
         """
         An activity with zero personalized option should be returned with all options empty.
