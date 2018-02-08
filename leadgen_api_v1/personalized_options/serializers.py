@@ -59,6 +59,20 @@ def validate_patterns(patterns):
         validate_probabilities(patterns[key])
 
 
+def validate_latitude(lat):
+    if -90 <= lat <= 90:
+        return
+    else:
+        raise serializers.ValidationError('Latitude value must in between -90 and 90. But {} is given'.format(lat))
+
+
+def validate_longitude(lon):
+    if -180 <= lon <= 180:
+        return
+    else:
+        raise serializers.ValidationError('Longitude value must in between -180 and 180. But {} is given'.format(lon))
+
+
 def create_travel_option_entry(activity, day_of_week, slot_id, tz):
     try:
         TravelOption.objects.get(activity__pk=activity.id, day_of_week=day_of_week, slot_id=slot_id)
@@ -73,6 +87,10 @@ def create_travel_option_entry(activity, day_of_week, slot_id, tz):
 
 class ActivitySerializer(serializers.ModelSerializer):
     patterns = serializers.JSONField(validators=[validate_patterns], required=False)
+    from_lat = serializers.FloatField(validators=[validate_latitude])
+    to_lat = serializers.FloatField(validators=[validate_latitude])
+    from_lon = serializers.FloatField(validators=[validate_longitude])
+    to_lon = serializers.FloatField(validators=[validate_longitude])
 
     def save(self, **kwargs):
         pat = self.validated_data.pop('patterns', {})
