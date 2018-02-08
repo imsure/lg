@@ -613,6 +613,33 @@ class ActivityViewTest(APITestCase):
         self.assertNotIn(const.WEEKDAY, [option.day_of_week for option in options])
         self.assertIn(const.THURSDAY, [option.day_of_week for option in options])
 
+    def test_update_activity_invalid_update_request(self):
+        """
+        Invalid (missing field, wrong type, etc) update request should be denied and
+        old entries of travel options should NOT be deleted.
+        """
+        from_id = next(place_id_iter)
+        to_id = next(place_id_iter)
+        activity = activity_tucson()
+
+        client = APIClient()
+        client.force_authenticate(user=self.user)
+        r = client.put(reverse('create_update_activity', kwargs={'from_id': from_id, 'to_id': to_id}),
+                       activity, format='json')
+        self.assertEqual(r.status_code, status.HTTP_201_CREATED)
+
+        activity = activity_tucson_update()
+        activity['from_lat'] = 99  # make the activity invalid
+        client = APIClient()
+        client.force_authenticate(user=self.user)
+        r = client.put(reverse('create_update_activity', kwargs={'from_id': from_id, 'to_id': to_id}),
+                       activity, format='json')
+        self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertRegex(r.content.decode('utf-8'), "Latitude value must in between -90 and 90")
+        activity_obj = Activity.objects.get(from_id=from_id, to_id=to_id)
+        options = TravelOption.objects.filter(activity_id=activity_obj.id)
+        self.assertEqual(len(options), 3)  # old entries shouldn't be deleted
+
     def test_update_travel_options_drive(self):
         """
         Update of a valid drive option should be successful.

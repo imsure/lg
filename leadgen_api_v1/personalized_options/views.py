@@ -65,17 +65,17 @@ def create_update_activity(request, from_id, to_id):
 
     try:  # Update
         activity = Activity.objects.get(from_id=from_id, to_id=to_id)
-        TravelOption.objects.filter(activity_id=activity.id).delete()  # delete old entries
         serializer = ActivitySerializer(activity, data=request.data)
-        status_code = status.HTTP_200_OK
-
+        if serializer.is_valid():
+            TravelOption.objects.filter(activity_id=activity.id).delete()  # delete old entries
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
     except Activity.DoesNotExist:  # Create
         serializer = ActivitySerializer(data=request.data)
-        status_code = status.HTTP_201_CREATED
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status_code)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
