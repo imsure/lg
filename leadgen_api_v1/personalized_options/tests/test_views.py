@@ -367,6 +367,70 @@ class ActivityViewTest(APITestCase):
         options = TravelOption.objects.all()
         self.assertEqual(len(options), 8)  # total 8 travel options for these 3 activites
 
+    def test_create_activity_invalid_latitude_upper_bound(self):
+        """
+        An activity with a invalid latitude value should be denied.
+        """
+        from_id = next(place_id_iter)
+        to_id = next(place_id_iter)
+        activity = activity_tucson()
+        activity['from_lat'] = 90.1  # invalid
+
+        client = APIClient()
+        client.force_authenticate(user=self.user)
+        r = client.put(reverse('create_update_activity', kwargs={'from_id': from_id, 'to_id': to_id}),
+                       activity, format='json')
+        self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertRegex(r.content.decode('utf-8'), "Latitude value must in between -90 and 90")
+
+    def test_create_activity_invalid_latitude_lower_bound(self):
+        """
+        An activity with a invalid latitude value should be denied.
+        """
+        from_id = next(place_id_iter)
+        to_id = next(place_id_iter)
+        activity = activity_tucson()
+        activity['to_lat'] = -90.1  # invalid
+
+        client = APIClient()
+        client.force_authenticate(user=self.user)
+        r = client.put(reverse('create_update_activity', kwargs={'from_id': from_id, 'to_id': to_id}),
+                       activity, format='json')
+        self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertRegex(r.content.decode('utf-8'), "Latitude value must in between -90 and 90")
+
+    def test_create_activity_invalid_longitude_upper_bound(self):
+        """
+        An activity with a invalid longitude value should be denied.
+        """
+        from_id = next(place_id_iter)
+        to_id = next(place_id_iter)
+        activity = activity_tucson()
+        activity['from_lon'] = 180.1  # invalid
+
+        client = APIClient()
+        client.force_authenticate(user=self.user)
+        r = client.put(reverse('create_update_activity', kwargs={'from_id': from_id, 'to_id': to_id}),
+                       activity, format='json')
+        self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertRegex(r.content.decode('utf-8'), "Longitude value must in between -180 and 180")
+
+    def test_create_activity_invalid_longitude_lower_bound(self):
+        """
+        An activity with a invalid latitude value should be denied.
+        """
+        from_id = next(place_id_iter)
+        to_id = next(place_id_iter)
+        activity = activity_tucson()
+        activity['to_lon'] = -180.1  # invalid
+
+        client = APIClient()
+        client.force_authenticate(user=self.user)
+        r = client.put(reverse('create_update_activity', kwargs={'from_id': from_id, 'to_id': to_id}),
+                       activity, format='json')
+        self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertRegex(r.content.decode('utf-8'), "Longitude value must in between -180 and 180")
+
     def test_create_activity_missing_pattern_field(self):
         """
         An activity without a pattern field should be denied.
