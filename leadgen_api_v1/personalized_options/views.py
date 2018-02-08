@@ -138,6 +138,12 @@ def personalized_options(request, from_id, to_id, day_of_week, slot_id):
             status=status.HTTP_400_BAD_REQUEST
         )
 
+    if slot_id < 1 or slot_id > 96:
+        return Response(
+            {'Error': 'slot_id must be in the range of 1 to 96! But {} is given'.format(slot_id)},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
     try:
         activity = Activity.objects.get(from_id=from_id, to_id=to_id)
     except Activity.DoesNotExist:

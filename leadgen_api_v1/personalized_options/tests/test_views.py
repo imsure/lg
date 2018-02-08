@@ -980,6 +980,24 @@ class ActivityViewTest(APITestCase):
         self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertRegex(r.content.decode('utf-8'), 'cannot be the same')
 
+    def test_get_personalized_options_slot_id_out_of_range(self):
+        """
+        An request to get personalized option in which slot_id is out of range should be denied.
+        """
+        client = APIClient()
+        client.force_authenticate(user=self.user)
+        r = client.get(reverse('personalized_options', kwargs={'day_of_week': const.WEEKDAY,
+                                                               'from_id': 1, 'to_id': 2,
+                                                               'slot_id': 0}))
+        self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertRegex(r.content.decode('utf-8'), 'slot_id must be in the range of 1 to 96')
+
+        r = client.get(reverse('personalized_options', kwargs={'day_of_week': const.WEEKDAY,
+                                                               'from_id': 1, 'to_id': 2,
+                                                               'slot_id': 97}))
+        self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertRegex(r.content.decode('utf-8'), 'slot_id must be in the range of 1 to 96')
+
     def test_get_personalized_options_activity_not_exist(self):
         """
         An request to get personalized option of an activity that does not exist should be denied.
