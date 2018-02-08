@@ -23,8 +23,8 @@ app.conf.beat_schedule = {
     },
     'task-every-15-minute': {  # schedule to run every 15-minute to update Uber options in real time
         'task': 'updater.uber_updater',
-        # 'schedule': crontab(minute='*/15'),
-        'schedule': crontab(minute='*/1'),  # for testing purpose
+        'schedule': crontab(minute='*/15'),
+        # 'schedule': crontab(minute='*/1'),  # for testing purpose
     },
 }
 app.conf.timezone = 'UTC'
