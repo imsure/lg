@@ -92,8 +92,11 @@ class TravelOptionProxy(object):
             if self.otp_router == 'tucson':
                 cost = const.SUNTRAN_FARE
             else:
-                cost = iti['fare']['fare']['regular']['cents']
-                cost = cost / 100  # cents -> dollars
+                try:
+                    cost = iti['fare']['fare']['regular']['cents']
+                    cost = cost / 100  # cents -> dollars
+                except KeyError:
+                    return None
 
             return {
                 'travel_time': travel_time,
@@ -138,8 +141,11 @@ class TravelOptionProxy(object):
         r = requests.get(url, headers=headers, params=params)
         if r.ok and r.status_code == 200:
             decoded = r.json()
-            wait_time = decoded['times'][0]['estimate']
-            return wait_time
+            if 'times' in decoded and len(decoded['times']) > 0:
+                wait_time = decoded['times'][0]['estimate']
+                return wait_time
+            else:
+                return None
         else:
             return None  # TODO: log the message
 
@@ -158,12 +164,13 @@ class TravelOptionProxy(object):
         }
 
         r = requests.get(url, headers=headers, params=params)
-        if r.ok and r.status_code == 200:
-            decoded = r.json()
+        decoded = r.json()
+        if r.ok and r.status_code == 200 and 'prices' in decoded:
             price_list = decoded['prices']
             for price in price_list:
                 if price['product_id'] == product_id:
                     return price['duration'], price['estimate']
+            return None, None  # no matching prodcut id found
         else:
             return None, None  # TODO: log the message
 
