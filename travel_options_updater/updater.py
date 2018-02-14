@@ -5,9 +5,11 @@ Celery periodic tasks for updating travel options.
 import pytz
 from datetime import datetime
 import requests
+import logging
 
 from celery import Celery
 from celery.schedules import crontab
+from celery.utils.log import get_task_logger
 
 import constants as const
 import utils
@@ -28,6 +30,9 @@ app.conf.beat_schedule = {
     },
 }
 app.conf.timezone = 'UTC'
+
+# logging.basicConfig(filename='/home/ubuntu/leadgen_updater.log', level=logging.DEBUG)
+logger = get_task_logger(__name__)
 
 
 def activity_detail(activity_id):
@@ -56,6 +61,8 @@ def parade_otp_updater():
        4-1 query Parade & OTP to get available plans, construct the request body
        4-2 PUT travel_options/travel_option_pk/
     """
+    task_started = datetime.now()
+
     now_pst = datetime.now(pytz.timezone('US/Pacific'))
     day_of_week_exact = const.DAY_OF_WEEK_MAP[now_pst.weekday()]
     if now_pst.weekday() <= 4:
@@ -85,7 +92,7 @@ def parade_otp_updater():
             r = requests.put(secrets.LEADGEN_URL + 'activity/{}/{}/{}/'.format(activity_id, walk_time, bike_time),
                              headers=headers)
             if r.status_code == 200:
-                print('Updated walk_time & bike_time for activity {}.'.format(activity_id))
+                logger.info('Updated walk_time & bike_time for activity {}.'.format(activity_id))
                 activity['walk_time'] = walk_time
                 activity['bike_time'] = bike_time
 
@@ -103,9 +110,14 @@ def parade_otp_updater():
             r = requests.put(secrets.LEADGEN_URL + 'travel_options/{}/'.format(option['id']),
                              json=modes, headers=headers)
             if r.ok and r.status_code == 200:
-                print('Updated driving & transit fields for option {}.'.format(option['id']))
+                logging.info('Updated driving & transit fields for option {} of activity {}.'
+                             .format(option['id'], activity_id))
             if not r.ok:
                 pass  # TODO: log the message
+
+    task_finished = datetime.now()
+    delta = task_finished - task_started
+    logger.info('Parade & OTP Updater finished in {} seconds'.format(delta.seconds))
 
 
 @app.task
@@ -122,14 +134,16 @@ def uber_updater():
        update this information via LeadGen API:
        PUT travel_options/travel_option_pk/
     """
+    task_started = datetime.now()
+
     fmt = "%Y-%m-%d %H:%M:%S %Z%z"
     now_utc = datetime.now(pytz.timezone('UTC'))
     for tz, tz_name in const.TIMEZONE_DICT.items():
         now_local = now_utc.astimezone(pytz.timezone(tz_name))
         slot_id = utils.minutes2slot_id(now_local.hour * 60 + now_local.minute)
         day_of_week_exact = const.DAY_OF_WEEK_MAP[now_local.weekday()]
-        print('Local Time at {}: {}, {} (slot: {})'.format(tz_name, day_of_week_exact,
-                                                           now_local.strftime(fmt), slot_id))
+        # print('Local Time at {}: {}, {} (slot: {})'.format(tz_name, day_of_week_exact,
+        #                                                    now_local.strftime(fmt), slot_id))
         if now_local.weekday() <= 4:
             day_of_week_general = const.WEEKDAY
         else:
@@ -163,6 +177,11 @@ def uber_updater():
                 r = requests.put(secrets.LEADGEN_URL + 'travel_options/{}/'.format(option['id']),
                                  json=modes, headers=headers)
                 if r.ok and r.status_code == 200:
-                    print('Updated uber field for option {}.'.format(option['id']))
+                    logger.info('Updated uber field for option {} of activity {}.'
+                                .format(option['id'], activity_id))
                 if not r.ok:
                     pass  # TODO: log the message
+
+    task_finished = datetime.now()
+    delta = task_finished - task_started
+    logger.info('Uber Updater finished in {} seconds'.format(delta.seconds))
