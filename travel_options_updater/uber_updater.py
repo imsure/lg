@@ -52,16 +52,12 @@ def uber_updater():
        PUT travel_options/travel_option_pk/
     """
     query_count_uber = 0
-    task_started = datetime.now()
 
-    fmt = "%Y-%m-%d %H:%M:%S %Z%z"
     now_utc = datetime.now(pytz.timezone('UTC'))
     for tz, tz_name in const.TIMEZONE_DICT.items():
         now_local = now_utc.astimezone(pytz.timezone(tz_name))
         slot_id = utils.minutes2slot_id(now_local.hour * 60 + now_local.minute)
         day_of_week_exact = const.DAY_OF_WEEK_MAP[now_local.weekday()]
-        # print('Local Time at {}: {}, {} (slot: {})'.format(tz_name, day_of_week_exact,
-        #                                                    now_local.strftime(fmt), slot_id))
         if now_local.weekday() <= 4:
             day_of_week_general = const.WEEKDAY
         else:
@@ -74,7 +70,6 @@ def uber_updater():
                           format(day_of_week_general, slot_id, tz), headers=headers)
 
         travel_options = r1.json() + r2.json()
-        # print('# of uber options to be updated: {}'.format(len(travel_options)))
         activity_dict = {}
         query_count_uber += len(travel_options)
         for option in travel_options:
@@ -95,13 +90,7 @@ def uber_updater():
             if modes:  # empty dict {} evaluate to be False
                 r = requests.put(secrets.LEADGEN_URL + 'travel_options/{}/'.format(option['id']),
                                  json=modes, headers=headers)
-                if r.ok and r.status_code == 200:
-                    logger.info('Updated uber field for option {} of activity {}.'
-                                .format(option['id'], activity_id))
                 if not r.ok:
                     pass  # TODO: log the message
 
     logger.info('# of queries made to Uber: {}'.format(query_count_uber))
-    task_finished = datetime.now()
-    delta = task_finished - task_started
-    # logger.info('Uber Updater finished in {} seconds'.format(delta.seconds))

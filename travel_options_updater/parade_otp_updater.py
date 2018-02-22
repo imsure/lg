@@ -55,7 +55,6 @@ def parade_otp_updater():
        4-1 query Parade & OTP to get available plans, construct the request body
        4-2 PUT travel_options/travel_option_pk/
     """
-    task_started = datetime.now()
     query_count_parade = 0
     query_count_otp = 0
 
@@ -108,15 +107,8 @@ def parade_otp_updater():
         if modes:  # empty dict {} evaluate to be False
             r = requests.put(secrets.LEADGEN_URL + 'travel_options/{}/'.format(option['id']),
                              json=modes, headers=headers)
-            if r.ok and r.status_code == 200:
-                pass
-                # logger.info('Updated driving & transit fields for option {} of activity {}.'
-                #             .format(option['id'], activity_id))
             if not r.ok:
                 pass  # TODO: log the message
 
     logger.info('# of queries made to Parade: {}; # of queries made to OTP: {}'
                 .format(query_count_parade, query_count_otp))
-    task_finished = datetime.now()
-    delta = task_finished - task_started
-    # logger.info('Parade & OTP Updater finished in {} seconds'.format(delta.seconds))
