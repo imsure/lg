@@ -51,6 +51,7 @@ def uber_updater():
        update this information via LeadGen API:
        PUT travel_options/travel_option_pk/
     """
+    query_count_uber = 0
     task_started = datetime.now()
 
     fmt = "%Y-%m-%d %H:%M:%S %Z%z"
@@ -75,6 +76,7 @@ def uber_updater():
         travel_options = r1.json() + r2.json()
         # print('# of uber options to be updated: {}'.format(len(travel_options)))
         activity_dict = {}
+        query_count_uber += len(travel_options)
         for option in travel_options:
             activity_id = option['activity']
             if activity_id not in activity_dict:
@@ -99,6 +101,7 @@ def uber_updater():
                 if not r.ok:
                     pass  # TODO: log the message
 
+    logger.info('# of queries made to Uber: {}'.format(query_count_uber))
     task_finished = datetime.now()
     delta = task_finished - task_started
     # logger.info('Uber Updater finished in {} seconds'.format(delta.seconds))

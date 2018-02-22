@@ -56,6 +56,8 @@ def parade_otp_updater():
        4-2 PUT travel_options/travel_option_pk/
     """
     task_started = datetime.now()
+    query_count_parade = 0
+    query_count_otp = 0
 
     now_pst = datetime.now(pytz.timezone('US/Pacific'))
     day_of_week_exact = const.DAY_OF_WEEK_MAP[now_pst.weekday()]
@@ -81,6 +83,7 @@ def parade_otp_updater():
                                   time=const.SLOT2TIME[option['slot_id']])
 
         if activity['walk_time'] is None or activity['bike_time'] is None:
+            query_count_otp += 2
             walk_time = proxy.otp_walk_bike(mode='WALK')
             bike_time = proxy.otp_walk_bike(mode='BICYCLE')
             r = requests.put(secrets.LEADGEN_URL + 'activity/{}/{}/{}/'.format(activity_id, walk_time, bike_time),
@@ -93,10 +96,12 @@ def parade_otp_updater():
         modes = {}
 
         drive_option = proxy.parade()
+        query_count_parade += 1
         if drive_option is not None:
             modes['drive'] = drive_option
 
         transit_option = proxy.otp_transit()
+        query_count_otp += 1
         if transit_option is not None:
             modes['transit'] = transit_option
 
@@ -110,6 +115,8 @@ def parade_otp_updater():
             if not r.ok:
                 pass  # TODO: log the message
 
+    logger.info('# of queries made to Parade: {}; # of queries made to OTP: {}'
+                .format(query_count_parade, query_count_otp))
     task_finished = datetime.now()
     delta = task_finished - task_started
     # logger.info('Parade & OTP Updater finished in {} seconds'.format(delta.seconds))
