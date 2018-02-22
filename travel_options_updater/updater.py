@@ -86,7 +86,7 @@ def parade_otp_updater():
                                   timezone=option['tz'], date=now_pst,
                                   time=const.SLOT2TIME[option['slot_id']])
 
-        if activity['walk_time'] is None or activity['walk_time'] is None:
+        if activity['walk_time'] is None or activity['bike_time'] is None:
             walk_time = proxy.otp_walk_bike(mode='WALK')
             bike_time = proxy.otp_walk_bike(mode='BICYCLE')
             r = requests.put(secrets.LEADGEN_URL + 'activity/{}/{}/{}/'.format(activity_id, walk_time, bike_time),
