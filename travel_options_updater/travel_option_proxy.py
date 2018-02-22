@@ -89,7 +89,7 @@ class TravelOptionProxy(object):
                     walk_time_egress = leg['duration']
             travel_time = iti['duration']
             wait_time = iti['waitingTime']
-            if self.otp_router == 'tucson':
+            if self.otp_router == 'tucson' and 'fare' not in iti:
                 cost = const.SUNTRAN_FARE
             else:
                 try:
