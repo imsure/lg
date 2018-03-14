@@ -21,5 +21,6 @@ from rest_framework.documentation import include_docs_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('personalized_options.urls')),
+    path('', include('personalized_incentive.urls')),
     path(r'docs/', include_docs_urls(title='LeadGen API', public=True)),
 ]

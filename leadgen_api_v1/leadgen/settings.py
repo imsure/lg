@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',  # install rest_framework as an Django app
     'rest_framework.authtoken',
     'personalized_options.apps.PersonalizedOptionsConfig',
+    'personalized_incentive.apps.PersonalizedIncentiveConfig',
 ]
 
 MIDDLEWARE = [
