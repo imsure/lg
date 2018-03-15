@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import IncentiveParams
+from .models import IncentivePoints
 
 
 def check_if_int_or_float(value, name):
@@ -28,9 +29,21 @@ class IncentiveParamsSerializer(serializers.ModelSerializer):
     """
     Serializer for IncentiveParams model.
     """
-
     incentives = serializers.JSONField(validators=[validate_incentives])
 
     class Meta:
         model = IncentiveParams
+        fields = '__all__'
+
+
+class IncentivePointsSerializer(serializers.ModelSerializer):
+    """
+    Serializer for IncentivePoints model.
+    """
+
+    def save(self, **kwargs):
+        pass
+
+    class Meta:
+        model = IncentivePoints
         fields = '__all__'

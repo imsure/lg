@@ -3,17 +3,67 @@ from django.http import Http404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework import permissions, authentication
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 
 from .serializers import IncentiveParamsSerializer
+from .serializers import IncentivePointsSerializer
 from .models import IncentiveParams
+from . import default_params
+
+
+def minutes2slot_id(minutes):
+    """
+    Convert time of day in total # of minutes to one of 96 time slot ID
+
+    :param minutes: time of day in total # of minutes
+    :return: slot id within [1, 96]
+    """
+    if minutes >= 1440:  # 24 * 60 = 1440
+        minutes -= 1440
+    return minutes // 15 + 1
+
+
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def personalized_incentive(request, metropia_id):
+    point_serializer = IncentivePointsSerializer(data=request.data)
+    if not point_serializer.is_valid():
+        return Response(point_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    slot_id = minutes2slot_id(request.data['minutes'])
+    energy = request.data['energy']
+    congestion_level = request.data['congestion_level']
+
+    try:
+        incentive_params = IncentiveParams.objects.get(pk=metropia_id)
+        alpha = incentive_params.alpha
+        beta = incentive_params.beta
+        gamma = incentive_params.gamma
+        incentives = eval(incentive_params.incentives)
+        incentive = incentives[slot_id - 1]
+    except IncentiveParams.DoesNotExist:
+        alpha = default_params.alpha
+        beta = default_params.beta
+        gamma = default_params.gamma
+        incentive = default_params.incentives[slot_id - 1]
+
+    points = alpha * incentive + beta * energy + gamma * congestion_level
+    return Response(
+        {'alpha': alpha, 'beta': beta, 'gamma': gamma, 'slot_id': slot_id, 'incentive': incentive,
+         'points': points, 'energy': energy, 'congestion_level': congestion_level},
+        status=status.HTTP_200_OK
+    )
 
 
 class IncentiveParamsDetail(APIView):
     """
     Retrieve, create or update incentive params for a metropia user.
     """
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
+
     def get_object(self, metropia_id):
         try:
             return IncentiveParams.objects.get(pk=metropia_id)
