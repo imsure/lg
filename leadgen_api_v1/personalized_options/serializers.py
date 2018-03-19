@@ -105,7 +105,7 @@ class ActivitySerializer(serializers.ModelSerializer):
         activity = self.instance
         for day_of_week, prob_list in pat.items():
             for slot_id, prob in enumerate(prob_list, start=1):
-                if prob >= const.PROB_THRESHOLD:  # TODO: use the actual value
+                if prob >= const.PROB_THRESHOLD:
                     create_travel_option_entry(activity, day_of_week, slot_id, tz)
 
     class Meta:
