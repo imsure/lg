@@ -73,6 +73,7 @@ def validate_longitude(lon):
         raise serializers.ValidationError('Longitude value must in between -180 and 180. But {} is given'.format(lon))
 
 
+# TODO: directly create travel option here, it's guaranteed that the option won't exist.
 def create_travel_option_entry(activity, day_of_week, slot_id, tz):
     try:
         TravelOption.objects.get(activity__pk=activity.id, day_of_week=day_of_week, slot_id=slot_id)
@@ -92,6 +93,7 @@ class ActivitySerializer(serializers.ModelSerializer):
     from_lon = serializers.FloatField(validators=[validate_longitude])
     to_lon = serializers.FloatField(validators=[validate_longitude])
 
+    # TODO: offload this additional task to a celery async task
     def save(self, **kwargs):
         pat = self.validated_data.pop('patterns', {})
 
