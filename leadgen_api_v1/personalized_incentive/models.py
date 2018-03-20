@@ -4,13 +4,18 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class IncentiveParams(models.Model):
     """
-    Incentive parameters for each metropia user
+    Incentive parameters for each metropia user.
+
+    case_id corresponds to 3 options shown on user's congratulation page after finishing a trip.
+    the mapping from case_id to description of unit is defined in default.py.
     """
     metropia_id = models.IntegerField(primary_key=True)
     alpha = models.FloatField()
     beta = models.FloatField()
     gamma = models.FloatField()
     incentives = models.TextField()
+    case_id = models.SmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(2)],
+                                       default=1)
 
 
 class IncentivePoints(models.Model):
