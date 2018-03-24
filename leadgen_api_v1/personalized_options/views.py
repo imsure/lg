@@ -38,10 +38,13 @@ def activity_walk_bike_time_update(request, pk, walk_time, bike_time):
     Update walk time and bike time retrieved from OTP to database.
     """
     activity = Activity.objects.get(pk=pk)
-    activity.walk_time = walk_time
-    activity.bike_time = bike_time
+    if walk_time > 0:
+        activity.walk_time = walk_time
+    if bike_time > 0:
+        activity.bike_time = bike_time
     activity.save()
-    return Response({'walk_time': walk_time, 'bike_time': bike_time}, status=status.HTTP_200_OK)
+    return Response({'walk_time': activity.walk_time, 'bike_time': activity.bike_time},
+                    status=status.HTTP_200_OK)
 
 
 @api_view(['PUT'])
@@ -93,6 +96,30 @@ def travel_options_by_day_of_week(request, day_of_week):
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))
+def travel_options_by_day_of_week_slot(request, day_of_week, slot_id):
+    """
+    Get a list of travel options given `day_of_week` and `slot_id`.
+    """
+    options = TravelOption.objects.filter(day_of_week=day_of_week, slot_id=slot_id)
+    serializer = TravelOptionRetrieveSerializer(options, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.IsAuthenticated,))
+def travel_options_by_day_of_week_slot_range(request, day_of_week, slot_id_start, slot_id_end):
+    """
+    Get a list of travel options given `day_of_week` and `slot_id`.
+    """
+    options = TravelOption.objects.filter(day_of_week=day_of_week,
+                                          slot_id__gte=slot_id_start,
+                                          slot_id__lte=slot_id_end)
+    serializer = TravelOptionRetrieveSerializer(options, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.IsAuthenticated,))
 def travel_options_by_day_of_week_slot_tz(request, day_of_week, slot_id, tz):
     """
     Get a list of travel options given `day_of_week`, `slot_id` and timezone `tz`.
@@ -121,7 +148,7 @@ def update_travel_options(request, pk):
 
     if serializer.is_valid():
         serializer.save()
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

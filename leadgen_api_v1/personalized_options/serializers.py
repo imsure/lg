@@ -119,6 +119,7 @@ class TravelOptionRetrieveSerializer(serializers.ModelSerializer):
     """
     We use this serializer to retrieve travel options for update purpose.
     """
+    activity = ActivitySerializer(read_only=True)
 
     class Meta:
         model = TravelOption

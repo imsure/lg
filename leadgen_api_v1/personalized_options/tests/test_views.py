@@ -613,6 +613,30 @@ class ActivityViewTest(APITestCase):
         self.assertNotIn(const.WEEKDAY, [option.day_of_week for option in options])
         self.assertIn(const.THURSDAY, [option.day_of_week for option in options])
 
+    def test_update_walk_bike_options(self):
+        """
+        When updating an activity, old entries of travel options should be deleted
+        and new entries should be created.
+        """
+        from_id = next(place_id_iter)
+        to_id = next(place_id_iter)
+        activity = activity_tucson()
+
+        client = APIClient()
+        client.force_authenticate(user=self.user)
+        r = client.put(reverse('create_update_activity', kwargs={'from_id': from_id, 'to_id': to_id}),
+                       activity, format='json')
+        self.assertEqual(r.status_code, status.HTTP_201_CREATED)
+        activity_obj = Activity.objects.get(from_id=from_id, to_id=to_id)
+        walk_time = 0
+        bike_time = 50
+        r = client.put(reverse('activity_walk_bike_time_update',
+                               kwargs={'pk': activity_obj.id, 'walk_time': walk_time, 'bike_time': bike_time}))
+        self.assertEqual(r.status_code, status.HTTP_200_OK)
+        activity_obj = Activity.objects.get(from_id=from_id, to_id=to_id)
+        self.assertEqual(activity_obj.walk_time, None)
+        self.assertEqual(activity_obj.bike_time, 50)
+
     def test_update_activity_invalid_update_request(self):
         """
         Invalid (missing field, wrong type, etc) update request should be denied and
